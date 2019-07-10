@@ -1,7 +1,7 @@
 {
   "name": "@shopgate-project/product-recommendations",
   "version": "0.1.0",
-  "description": "",
+  "description": "Extension will display retrieved product pipeline data from external providers. (ie. Boxalino, etc)",
   "license": "Apache-2.0",
   "scripts": {
     "test": "mocha --use_strict --recursive test",
