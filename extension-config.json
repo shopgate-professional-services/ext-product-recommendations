@@ -2,8 +2,12 @@
   "version": "0.1.0",
   "id": "@shopgate-project/product-recommendations",
   "components": [
-    
+    {
+      "id": "CMSProductRecommendations",
+      "path": "frontend/widgets/CMSProductRecommendations/index.jsx",
+      "type": "widgets",
+      "description": "Custom widget for recommended products on a CMS page"
+    }
   ],
-  "configuration": {
-  }
+  "configuration": {}
 }
