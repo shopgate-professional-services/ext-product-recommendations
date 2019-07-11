@@ -1,7 +1,7 @@
 import { logger } from '@shopgate/pwa-core/helpers';
 import PipelineRequest from '@shopgate/pwa-core/classes/PipelineRequest';
 import { shouldFetchData } from '@shopgate/pwa-common/helpers/redux';
-import { getDummies } from '../selectors';
+import { fetchProductsById } from '@shopgate/pwa-common-commerce/product/';
 import {
   requestRecommendations,
   receiveRecommendations,
@@ -13,24 +13,21 @@ import {
   RECOMMENDATION_TYPE_USER,
 } from '../constants';
 
-export const fetchRecommendations = (type, id = null) => (dispatch, getState) => {
-  //const state = getState();
-  //const dummies = getDummies(state, dummyId);
-  //
-  //if (!shouldFetchData(dummies)) {
-  //  return;
-  //}
-
+/**
+ * @param {string} id id
+ * @param {Object} type type
+ * @returns {Function}
+ */
+export const fetchRecommendations = (id = null, type) => (dispatch, getState) => {
   dispatch(requestRecommendations({ id, type }));
 
   new PipelineRequest('shopgate.getProductRecommendations')
     .setInput({ id, type })
     .dispatch()
     .then(({ products }) => {
-      dispatch(receiveRecommendations({ id, type, products }));
-
-      // TODO: receiveProducts
-
+      const productIds = products.map(product => product.id);
+      dispatch(receiveRecommendations({ id, type, productIds }));
+      dispatch(fetchProductsById(productIds));
     })
     .catch((err) => {
       logger.error(err);

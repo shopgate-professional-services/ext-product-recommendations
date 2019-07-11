@@ -1,40 +1,54 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import ProductSlider from '../../components/ProductSlider';
+import { useTheme } from '@shopgate/engage/core';
+import connect from './connector';
 
 /**
  * @param {Object} settings Settings passed from widget
  * @returns {JSX}
  */
-const CMSProductRecommendations = ({ settings }) => {
+const CMSProductRecommendations = ({
+  settings,
+  fetchRecommendations,
+  userRecommendedProducts,
+}) => {
   if (!settings) { return null; }
+  const { ProductSlider } = useTheme();
   const {
-    text,
-    headlineTag,
+    h3Title,
+    h2Text,
     productLimit,
-    textColor,
   } = settings;
-  const styles = {
-    color: textColor,
-  };
-  const headline = headlineTag === 'h2' ? (
-    <h2 style={styles}>{text}</h2>
-  ) : (
-    <h3 style={styles}>{text}</h3>
-  );
 
+  useEffect(() => {
+    fetchRecommendations('001', 'user');
+  }, []);
+  const render = !userRecommendedProducts || userRecommendedProducts.isFetching === true ?
+    null :
+    (
+      <div>
+        {h3Title && (<h3>{h3Title}</h3>)}
+        {h2Text && (<h2>{h2Text}</h2>)}
+        <ProductSlider
+          slidesPerView={2.3}
+          productIds={userRecommendedProducts.productIds}
+        />
+      </div>
+    );
   return (
-    headline,
-      <ProductSlider />
+    render
   );
 };
 
 CMSProductRecommendations.propTypes = {
+  fetchRecommendations: PropTypes.func.isRequired,
   settings: PropTypes.shape(),
+  userRecommendedProducts: PropTypes.shape(),
 };
 
 CMSProductRecommendations.defaultProps = {
   settings: null,
+  userRecommendedProducts: null,
 };
 
-export default CMSProductRecommendations;
+export default connect(CMSProductRecommendations);

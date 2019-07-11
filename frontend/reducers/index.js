@@ -5,6 +5,13 @@ import {
   RECOMMENDATION_TYPE_PRODUCT,
 } from '../constants';
 
+/**
+ * Data Object
+ * @param {Object} state state
+ * @param {Object} payload incoming information
+ * @param {Object} data data type
+ * @returns {Object}
+ */
 const wrapData = (state, payload, data) => {
   const returnData = {
     ...state,
@@ -21,6 +28,11 @@ const wrapData = (state, payload, data) => {
   return returnData;
 };
 
+/**
+ * @param {Obect} state  State
+ * @param {Object} Action Action
+ * @returns {Object}
+ */
 const recommendationsByType = (
   state = {},
   { type, payload }
@@ -33,7 +45,7 @@ const recommendationsByType = (
       });
     case RECEIVE_RECOMMENDATIONS:
       return wrapData(state, payload, {
-        products: payload.products,
+        productIds: payload.productIds,
         isFetching: false,
         expires: Date.now() + 3600000,
       });
