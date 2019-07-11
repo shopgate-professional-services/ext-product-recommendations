@@ -1,51 +1,50 @@
 import {
-  ERROR_DUMMIES,
-  RECEIVE_DUMMIES,
-  REQUEST_DUMMIES,
+  ERROR_RECOMMENDATIONS,
+  RECEIVE_RECOMMENDATIONS,
+  REQUEST_RECOMMENDATIONS,
+  RECOMMENDATION_TYPE_PRODUCT,
 } from '../constants';
 
-/**
- * Dummy reducer.
- * @param {Object} state State.
- * @param {Object} action Action.
- * @returns {Object}
- */
-const dummyReducer = (
+const wrapData = (state, payload, data) => {
+  const returnData = {
+    ...state,
+    [payload.type]: data,
+  };
+
+  if (payload.id && payload.type === RECOMMENDATION_TYPE_PRODUCT) {
+    returnData[payload.type] = {
+      ...state[payload.type],
+      [payload.id]: data,
+    };
+  }
+
+  return returnData;
+};
+
+const recommendationsByType = (
   state = {},
-  action
+  { type, payload }
 ) => {
-  switch (action.type) {
-    case REQUEST_DUMMIES:
-      return {
-        ...state,
-        [action.dummyId]: {
-          ...state[action.dummyId],
-          isFetching: true,
-          expires: 0,
-        },
-      };
-    case RECEIVE_DUMMIES:
-      return {
-        ...state,
-        [action.dummyId]: {
-          ...state[action.dummyId],
-          swatches: action.swatches,
-          isFetching: false,
-          expires: Date.now() + 3600000,
-        },
-      };
-    case ERROR_DUMMIES:
-      return {
-        ...state,
-        [action.dummyId]: {
-          ...state[action.dummyId],
-          isFetching: false,
-          expires: 0,
-        },
-      };
+  switch (type) {
+    case REQUEST_RECOMMENDATIONS:
+      return wrapData(state, payload, {
+        isFetching: true,
+        expires: 0,
+      });
+    case RECEIVE_RECOMMENDATIONS:
+      return wrapData(state, payload, {
+        products: payload.products,
+        isFetching: false,
+        expires: Date.now() + 3600000,
+      });
+    case ERROR_RECOMMENDATIONS:
+      return wrapData(state, payload, {
+        isFetching: false,
+        expires: 0,
+      });
     default:
       return state;
   }
 };
 
-export default dummyReducer;
+export default recommendationsByType;

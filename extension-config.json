@@ -2,8 +2,45 @@
   "version": "0.1.0",
   "id": "@shopgate-project/product-recommendations",
   "components": [
-    
+    {
+      "id": "recommendations",
+      "path": "frontend/pages/Recommendations/index.jsx",
+      "target": "app.routes",
+      "type": "portals"
+    },
+    {
+      "id": "recommendationsByType",
+      "path": "frontend/reducers/index.js",
+      "type": "reducers"
+    }
   ],
   "configuration": {
+    "pageTitle": {
+      "type": "admin",
+      "destination": "frontend",
+      "default": "Productempfehlungen",
+      "params": {
+        "label": "Page title",
+        "type": "text"
+      }
+    },
+    "pageH2": {
+      "type": "admin",
+      "destination": "frontend",
+      "default": "Deine persönliche Auswahl",
+      "params": {
+        "label": "Headline 2 of the user recommendation page",
+        "type": "text"
+      }
+    },
+    "pageH3": {
+      "type": "admin",
+      "destination": "frontend",
+      "default": "PRODUCTEMPFEHLUNGEN",
+      "params": {
+        "label": "Headline 3 of the user recommendation page",
+        "type": "text"
+      }
+    }
   }
 }

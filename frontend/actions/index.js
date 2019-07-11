@@ -3,33 +3,41 @@ import PipelineRequest from '@shopgate/pwa-core/classes/PipelineRequest';
 import { shouldFetchData } from '@shopgate/pwa-common/helpers/redux';
 import { getDummies } from '../selectors';
 import {
-  errorDummies,
-  receiveDummies,
-  requestDummies,
+  requestRecommendations,
+  receiveRecommendations,
+  errorRecommendations,
 } from '../action-creators';
+import {
+  RECOMMENDATION_TYPE_CART,
+  RECOMMENDATION_TYPE_PRODUCT,
+  RECOMMENDATION_TYPE_USER,
+} from '../constants';
 
-/**
- * Get product swatches action.
- * @param {string} dummyId dummyId
- * @returns {Function}
- */
-export const fetchDummies = dummyId => (dispatch, getState) => {
-  const state = getState();
-  const dummies = getDummies(state, dummyId);
+export const fetchRecommendations = (type, id = null) => (dispatch, getState) => {
+  //const state = getState();
+  //const dummies = getDummies(state, dummyId);
+  //
+  //if (!shouldFetchData(dummies)) {
+  //  return;
+  //}
 
-  if (!shouldFetchData(dummies)) {
-    return;
-  }
+  dispatch(requestRecommendations({ id, type }));
 
-  dispatch(requestDummies(dummyId));
-
-  new PipelineRequest('dummy')
+  new PipelineRequest('shopgate.getProductRecommendations')
+    .setInput({ id, type })
     .dispatch()
-    .then((response) => {
-      dispatch(receiveDummies(dummyId, response));
+    .then(({ products }) => {
+      dispatch(receiveRecommendations({ id, type, products }));
+
+      // TODO: receiveProducts
+
     })
     .catch((err) => {
       logger.error(err);
-      dispatch(errorDummies(dummyId));
+      dispatch(errorRecommendations({ id, type }));
     });
+};
+
+export const fetchUserRecommendations = () => (dispatch) => {
+  dispatch(fetchRecommendations(RECOMMENDATION_TYPE_USER));
 };
