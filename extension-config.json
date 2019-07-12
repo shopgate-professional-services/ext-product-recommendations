@@ -12,6 +12,12 @@
       "id": "recommendationsByType",
       "path": "frontend/reducers/index.js",
       "type": "reducers"
+    },
+    {
+      "id": "ProductTaxDisclaimerAfter",
+      "path": "frontend/portals/ProductTaxDisclaimerAfter/index.jsx",
+      "target": "product.tax-disclaimer.after",
+      "type": "portals"
     }
   ],
   "configuration": {
