@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { fetchUserRecommendations } from '../../actions';
+import { getUserRecommendations } from '../../selectors';
 
 /**
  * Maps state to props.
@@ -7,6 +8,7 @@ import { fetchUserRecommendations } from '../../actions';
  * @returns {Object}
  */
 const mapStateToProps = state => ({
+  products: getUserRecommendations(state),
 });
 
 /**
