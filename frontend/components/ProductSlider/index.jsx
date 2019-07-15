@@ -24,6 +24,6 @@ const ProductSlider = ({ type, id }) => {
 ProductSlider.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-}
+};
 
 export default ProductSlider;
