@@ -1,6 +1,10 @@
 import { css } from 'glamor';
-import { themeConfig } from '@shopgate/pwa-common/helpers/config';
 
+/**
+ * @param {string} background Value for the background property
+ * @param {string} color Value for the color property
+ * @return {StyleAttribute}
+ */
 const wrapper = (background, color) => css({
   background,
   color,
