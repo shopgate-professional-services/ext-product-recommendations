@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getUserRecommendedProducts } from '../../selectors';
+import { getUserRecommendations } from '../../selectors';
 import { fetchRecommendations } from '../../actions';
 
 /**
@@ -7,7 +7,7 @@ import { fetchRecommendations } from '../../actions';
  * @returns {Object}
  */
 const mapStateToProps = state => ({
-  userRecommendedProducts: getUserRecommendedProducts(state),
+  userRecommendations: getUserRecommendations(state),
 });
 
 const mapDispatchToProps = ({

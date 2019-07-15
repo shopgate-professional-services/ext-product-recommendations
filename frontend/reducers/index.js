@@ -45,7 +45,7 @@ const recommendationsByType = (
       });
     case RECEIVE_RECOMMENDATIONS:
       return wrapData(state, payload, {
-        productIds: payload.productIds,
+        products: payload.products,
         isFetching: false,
         expires: Date.now() + 3600000,
       });

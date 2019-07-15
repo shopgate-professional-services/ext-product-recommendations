@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@shopgate/engage/core';
 import connect from './connector';
@@ -10,7 +10,7 @@ import connect from './connector';
 const CMSProductRecommendations = ({
   settings,
   fetchRecommendations,
-  userRecommendedProducts,
+  userRecommendations,
 }) => {
   if (!settings) { return null; }
   const { ProductSlider } = useTheme();
@@ -19,21 +19,23 @@ const CMSProductRecommendations = ({
     h2Text,
     productLimit,
   } = settings;
-
   useEffect(() => {
     fetchRecommendations('001', 'user');
   }, []);
-  const render = !userRecommendedProducts || userRecommendedProducts.isFetching === true ?
+  const render = !userRecommendations ?
     null :
     (
-      <div>
+      <Fragment>
         {h3Title && (<h3>{h3Title}</h3>)}
         {h2Text && (<h2>{h2Text}</h2>)}
-        <ProductSlider
-          slidesPerView={2.3}
-          productIds={userRecommendedProducts.productIds}
-        />
-      </div>
+        <div>
+          <ProductSlider
+            autoplay
+            delay={7000}
+            productIds={userRecommendations.map(product => product.id)}
+          />
+        </div>
+      </Fragment>
     );
   return (
     render
@@ -43,12 +45,12 @@ const CMSProductRecommendations = ({
 CMSProductRecommendations.propTypes = {
   fetchRecommendations: PropTypes.func.isRequired,
   settings: PropTypes.shape(),
-  userRecommendedProducts: PropTypes.shape(),
+  userRecommendations: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 CMSProductRecommendations.defaultProps = {
   settings: null,
-  userRecommendedProducts: null,
+  userRecommendations: null,
 };
 
 export default connect(CMSProductRecommendations);

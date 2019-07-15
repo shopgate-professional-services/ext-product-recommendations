@@ -25,6 +25,7 @@ class RecommendationsPage extends Component {
       View,
       ProductGrid,
       fetchUserRecommendations,
+      products,
     } = this.props;
     return (
       <View>
@@ -38,11 +39,10 @@ class RecommendationsPage extends Component {
 
         <h1>FOO</h1>
 
-
         <ProductGrid
           handleGetProducts={fetchUserRecommendations}
-          products={[]}
-          totalProductCount={0}
+          products={products || []}
+          totalProductCount={products ? products.length : 0}
           requestHash={''}
         />
       </View>
