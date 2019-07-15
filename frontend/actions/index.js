@@ -43,7 +43,6 @@ export const fetchRecommendations = (type, id = null) => (dispatch, getState) =>
 };
 
 export const fetchUserRecommendations = () => async (dispatch) => {
-  // TODO: re-fetch on user update
   LoadingProvider.setLoading(RECOMMENDATIONS_PATH);
 
   await dispatch(fetchRecommendations(RECOMMENDATION_TYPE_USER));

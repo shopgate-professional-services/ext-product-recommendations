@@ -34,6 +34,11 @@ export const getRecommendationsForType = createSelector(
   recommendationsState => recommendationsState ? recommendationsState.products : null
 );
 
-export const getUserRecommendations = state => getRecommendationsForType(state, { type: RECOMMENDATION_TYPE_USER });
-export const getCartRecommendations = state => getRecommendationsForType(state, { type: RECOMMENDATION_TYPE_CART });
-export const getProductRecommendations = (state, { id }) => getRecommendationsForType(state, { type: RECOMMENDATION_TYPE_PRODUCT, id });
+export const getUserRecommendations = state =>
+  getRecommendationsForType(state, { type: RECOMMENDATION_TYPE_USER });
+
+export const getCartRecommendations = state =>
+  getRecommendationsForType(state, { type: RECOMMENDATION_TYPE_CART });
+
+export const getProductRecommendations = (state, { id }) =>
+  getRecommendationsForType(state, { type: RECOMMENDATION_TYPE_PRODUCT, id });
