@@ -26,7 +26,8 @@
       "default": {
         "h2": "Headline 2",
         "h3": "Headline 3",
-        "background": "yellow"
+        "background": "yellow",
+        "textColor": "blue"
       },
       "params": {
         "label": "Config for the recommendation page",
