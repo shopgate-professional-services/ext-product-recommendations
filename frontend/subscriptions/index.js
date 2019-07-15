@@ -1,13 +1,14 @@
-import { main$ } from '@shopgate/pwa-common/streams/main';
+import { userDidLogin$, userDidLogout$ } from '@shopgate/engage/user';
+import { fetchUserRecommendations } from '../actions';
 
 /**
  * Subscriptions
  * @param {Function} subscribe Subscribe.
  */
-const dummySubscriptions = (subscribe) => {
-  subscribe(main$, ({ dispatch, getState }) => {
-
+const recommendationSubscriptions = (subscribe) => {
+  subscribe(userDidLogin$.merge(userDidLogout$), ({ dispatch }) => {
+    dispatch(fetchUserRecommendations());
   });
 };
 
-export default dummySubscriptions;
+export default recommendationSubscriptions;

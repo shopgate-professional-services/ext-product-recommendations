@@ -4,7 +4,9 @@ import { withTheme } from '@shopgate/engage/core';
 import { Route } from '@shopgate/engage/components';
 import connect from './connector';
 import { RECOMMENDATIONS_PATH } from '../../constants';
-import config from '../../config';
+import { recommendationsPage } from '../../config';
+import styles from './style';
+import Header from '../../components/Header';
 
 class RecommendationsPage extends Component {
   static propTypes = {
@@ -29,21 +31,18 @@ class RecommendationsPage extends Component {
     } = this.props;
     return (
       <View>
-        <AppBar title={config.pageTitle}/>
-
-        <div>
-          {config.pageH3 && (<h3>{config.pageH3}</h3>)}
-          {config.pageH2 && (<h2>{config.pageH2}</h2>)}
-          {/*  TODO: bg image */}
-        </div>
-
-        <h1>FOO</h1>
+        <AppBar title={recommendationsPage.pageTitle} />
+        <Header
+          h2={recommendationsPage.h2}
+          h3={recommendationsPage.h3}
+          background={recommendationsPage.background}
+        />
 
         <ProductGrid
           handleGetProducts={fetchUserRecommendations}
           products={products || []}
           totalProductCount={products ? products.length : 0}
-          requestHash={''}
+          requestHash=""
         />
       </View>
     );

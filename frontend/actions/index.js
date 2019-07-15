@@ -2,6 +2,7 @@ import { logger } from '@shopgate/pwa-core/helpers';
 import PipelineRequest from '@shopgate/pwa-core/classes/PipelineRequest';
 import { shouldFetchData } from '@shopgate/pwa-common/helpers/redux';
 import receiveProducts from '@shopgate/pwa-common-commerce/product/action-creators/receiveProducts';
+import { LoadingProvider } from '@shopgate/pwa-common/providers';
 import { getDummies } from '../selectors';
 import {
   requestRecommendations,
@@ -12,6 +13,7 @@ import {
   RECOMMENDATION_TYPE_CART,
   RECOMMENDATION_TYPE_PRODUCT,
   RECOMMENDATION_TYPE_USER,
+  RECOMMENDATIONS_PATH,
 } from '../constants';
 
 export const fetchRecommendations = (type, id = null) => (dispatch, getState) => {
@@ -24,18 +26,14 @@ export const fetchRecommendations = (type, id = null) => (dispatch, getState) =>
 
   dispatch(requestRecommendations({ id, type }));
 
-  new PipelineRequest('shopgate.getProductRecommendations')
+  return new PipelineRequest('shopgate.getProductRecommendations')
     .setInput({ id, type })
     .dispatch()
     .then(({ products }) => {
       dispatch(receiveRecommendations({ id, type, products }));
 
       dispatch(receiveProducts({
-        hash: '',
-        requestParams: {},
         products,
-        totalResultCount: products.length,
-        cached: false,
       }));
 
     })
@@ -45,6 +43,11 @@ export const fetchRecommendations = (type, id = null) => (dispatch, getState) =>
     });
 };
 
-export const fetchUserRecommendations = () => (dispatch) => {
-  dispatch(fetchRecommendations(RECOMMENDATION_TYPE_USER));
+export const fetchUserRecommendations = () => async (dispatch) => {
+  // TODO: re-fetch on user update
+  LoadingProvider.setLoading(RECOMMENDATIONS_PATH);
+
+  await dispatch(fetchRecommendations(RECOMMENDATION_TYPE_USER));
+
+  LoadingProvider.unsetLoading(RECOMMENDATIONS_PATH);
 };
