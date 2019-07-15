@@ -36,6 +36,7 @@ class RecommendationsPage extends Component {
           h2={recommendationsPage.h2}
           h3={recommendationsPage.h3}
           background={recommendationsPage.background}
+          textColor={recommendationsPage.textColor}
         />
 
         <ProductGrid
