@@ -39,6 +39,20 @@
         "label": "Config for the recommendation page",
         "type": "json"
       }
+    },
+    "productPage": {
+      "type": "admin",
+      "destination": "frontend",
+      "default": {
+        "h2": "Headline 2",
+        "h3": "Headline 3",
+        "background": "yellow",
+        "textColor": "blue"
+      },
+      "params": {
+        "label": "Config for the recommendation page",
+        "type": "json"
+      }
     }
   }
 }
