@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withPageProductId } from '@shopgate-ps/pwa-extension-kit/connectors';
+import { withCurrentProduct } from '@shopgate/engage/core';
 import ProductSlider from '../../components/ProductSlider';
 import { RECOMMENDATION_TYPE_PRODUCT } from '../../constants';
 
@@ -17,4 +17,4 @@ ProductTaxDisclaimerAfter.propTypes = {
   productId: PropTypes.string.isRequired,
 };
 
-export default withPageProductId(ProductTaxDisclaimerAfter);
+export default withCurrentProduct(ProductTaxDisclaimerAfter);
