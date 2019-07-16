@@ -1,4 +1,23 @@
 # Shopgate Connect - Extension product-recommendations
+Extension will display retrieved product pipeline data from external providers. (ie. Boxalino, etc)
+
+## Example widget Configuration
+```
+<!--Widget
+{
+  "type": "@shopgate-project/product-recommendations/CMSProductRecommendations",
+  "settings": {
+    "text": "Home Page Recommendation",
+	"h3Title": "PRODUKTEMPFEHLUNGEN",
+	"h2Text": "Deine personliche Auswahl",
+	"productLimit": 6,
+	"CTABackgroundColor": "green",
+	"CTAColor": "white",
+	"CTAText": "Zudeinen Empfehlungen"
+  }
+}
+-->
+```
 
 ## About Shopgate
 
