@@ -42,5 +42,8 @@
   },
   "peerDependenciees": {
     "@shopgate/engage": "^6.5.3"
+  },
+  "dependencies": {
+    "@shopgate-ps/pwa-extension-kit": "^0.7.1"
   }
 }

@@ -1,5 +1,14 @@
 {
-  "pageTitle": "Productempfehlungen",
-  "pageH2": "Deine persönliche Auswahl",
-  "pageH3": "PRODUCTEMPFEHLUNGEN"
+  "recommendationsPage": {
+    "h2": "Headline 2",
+    "h3": "Headline 3",
+    "background": "yellow",
+    "textColor": "blue"
+  },
+  "productPage": {
+    "h2": "Headline 2",
+    "h3": "Headline 3",
+    "background": "yellow",
+    "textColor": "blue"
+  }
 }

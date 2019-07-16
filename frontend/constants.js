@@ -8,4 +8,6 @@ export const RECOMMENDATION_TYPE_PRODUCT = 'product';
 export const RECOMMENDATION_TYPE_CART = 'cart';
 export const RECOMMENDATION_TYPE_USER = 'user';
 
+export const RECOMMENDATION_TYPE_CMS = 'cms';
+
 export const REDUX_NAMESPACE_RECOMMENDATIONS_BY_TYPE = '@shopgate-project/product-recommendations/recommendationsByType';

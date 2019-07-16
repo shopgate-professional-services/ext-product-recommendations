@@ -1,56 +1,49 @@
-import React, { Fragment, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '@shopgate/engage/core';
+import { Button } from '@shopgate/engage/components';
+import ProductSlider from '../../components/ProductSlider';
 import connect from './connector';
+import { RECOMMENDATION_TYPE_CMS } from '../../constants';
+import styles from './style';
 
 /**
- * @param {Object} settings Settings passed from widget
  * @returns {JSX}
  */
 const CMSProductRecommendations = ({
+  navigate,
   settings,
-  fetchRecommendations,
-  userRecommendations,
 }) => {
   if (!settings) { return null; }
-  const { ProductSlider } = useTheme();
   const {
     h3Title,
     h2Text,
     productLimit,
+    CTABackgroundColor,
+    CTAColor,
+    CTAText,
   } = settings;
-  useEffect(() => {
-    fetchRecommendations('001', 'user');
-  }, []);
-  const render = !userRecommendations ?
-    null :
-    (
-      <Fragment>
-        {h3Title && (<h3>{h3Title}</h3>)}
-        {h2Text && (<h2>{h2Text}</h2>)}
-        <div>
-          <ProductSlider
-            autoplay
-            delay={7000}
-            productIds={userRecommendations.map(product => product.id)}
-          />
-        </div>
-      </Fragment>
-    );
   return (
-    render
+    <div>
+      {h3Title && (<h3 className={styles.h3}>{h3Title}</h3>)}
+      {h2Text && (<h2 className={styles.h2}>{h2Text}</h2>)}
+      <ProductSlider type={RECOMMENDATION_TYPE_CMS} id="cms" productLimit={productLimit} />
+      <Button
+        className={styles.button(CTABackgroundColor, CTAColor)}
+        onClick={() => navigate()}
+      >
+        {CTAText}
+      </Button>
+    </div>
   );
 };
-
 CMSProductRecommendations.propTypes = {
-  fetchRecommendations: PropTypes.func.isRequired,
+  navigate: PropTypes.func,
   settings: PropTypes.shape(),
-  userRecommendations: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 CMSProductRecommendations.defaultProps = {
+  navigate: () => { },
   settings: null,
-  userRecommendations: null,
 };
 
 export default connect(CMSProductRecommendations);
