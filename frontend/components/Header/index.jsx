@@ -9,12 +9,18 @@ import styles from './style';
  */
 const Header = ({
   h2, h3, background, textColor,
-}) => (
-  <div className={styles.wrapper(background, textColor)}>
-    {h3 && (<h3 className={styles.h3}>{h3}</h3>)}
-    {h2 && (<h2 className={styles.h2}>{h2}</h2>)}
-  </div>
-);
+}) => {
+  if (!(h3 || h2)) {
+    return null;
+  }
+
+  return (
+    <div className={styles.wrapper(background, textColor)}>
+      {h3 && (<h3 className={styles.h3}>{h3}</h3>)}
+      {h2 && (<h2 className={styles.h2}>{h2}</h2>)}
+    </div>
+  );
+};
 
 Header.propTypes = {
   background: PropTypes.string,

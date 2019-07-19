@@ -19,6 +19,17 @@ Extension will display retrieved product pipeline data from external providers. 
 -->
 ```
 
+## Config
+
+### recommendationsPage
+Settings for the recommendation page
+
+- `title`: the title of the page,
+- `h2`: Headline H2 of the header,
+- `h3`: Headline H3 of the header,
+- `background`: CSS value for the background property of the header (e.g `#fff`, `url("header.png")`)
+- `textColor`: Text color in the header (e.g `#000`)
+
 ## About Shopgate
 
 Shopgate is the leading mobile commerce platform.

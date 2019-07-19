@@ -22,7 +22,7 @@ const RecommendationsPage = (props) => {
   } = props;
   return (
     <View>
-      <AppBar title={recommendationsPage.pageTitle} />
+      <AppBar title={recommendationsPage.title} />
       <Header
         h2={recommendationsPage.h2}
         h3={recommendationsPage.h3}
