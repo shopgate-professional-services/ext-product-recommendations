@@ -28,6 +28,7 @@ const Slider = ({ products, productLimit, type }) => {
   }
   const headerProps = { ...productPage };
   let header;
+
   switch (type) {
     case RECOMMENDATION_TYPE_PRODUCT:
       header = (<Header {...headerProps} />);
@@ -46,9 +47,11 @@ const Slider = ({ products, productLimit, type }) => {
     default:
       header = null;
   }
+
   const productIds = productLimit ?
     products.map(p => p.id).slice(0, productLimit) :
     products.map(p => p.id);
+
   return (
     <div className={wrapper}>
       {header}
