@@ -2,7 +2,7 @@
 
 ## Config
 
-### recommendationsPage
+### recommendationsPage and productPage
 Settings for the recommendation page
 
 - `title`: the title of the page,

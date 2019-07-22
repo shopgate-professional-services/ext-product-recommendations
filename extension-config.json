@@ -51,7 +51,7 @@
         "textColor": "blue"
       },
       "params": {
-        "label": "Config for the recommendation page",
+        "label": "Config for the recommendations on PDP",
         "type": "json"
       }
     }
