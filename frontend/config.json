@@ -1,9 +1,10 @@
 {
   "recommendationsPage": {
-    "h2": "Headline 2",
-    "h3": "Headline 3",
-    "background": "yellow",
-    "textColor": "blue"
+    "title": "",
+    "h2": "",
+    "h3": "",
+    "background": "",
+    "textColor": ""
   },
   "productPage": {
     "h2": "Headline 2",

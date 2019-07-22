@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '@shopgate/engage/core';
+import { useTheme, useNavigation } from '@shopgate/engage/core';
+import { Button } from '@shopgate/engage/components';
 import { css } from 'glamor';
-import {
-  RECOMMENDATION_TYPE_PRODUCT,
-  RECOMMENDATION_TYPE_CART,
-  RECOMMENDATION_TYPE_USER,
-  RECOMMENDATION_TYPE_CMS,
-} from '../../constants';
+import { RECOMMENDATIONS_PATH } from '../../constants';
 import { productPage } from '../../config';
 import Header from '../Header';
+import styles from './style';
 
 const wrapper = css({
   padding: '1rem 0',
@@ -17,64 +14,58 @@ const wrapper = css({
 
 /**
  * Slider component.
- * @param {Array|null} products Products
+ * @param {Object} props props
  * @returns {JSX}
  */
-const Slider = ({ products, productLimit, type }) => {
-  const { ProductSlider } = useTheme();
-
-  if (!products) {
+const Slider = ({ products, type, settings }) => {
+  if (!products || !products.length) {
     return null;
   }
-  const headerProps = { ...productPage };
-  let header;
+  const { ProductSlider } = useTheme();
+  const { push } = useNavigation();
 
-  switch (type) {
-    case RECOMMENDATION_TYPE_PRODUCT:
-      header = (<Header {...headerProps} />);
-      break;
-    case RECOMMENDATION_TYPE_CART:
-      // TO-DO
-      header = null;
-      break;
-    case RECOMMENDATION_TYPE_USER:
-      // TO-DO
-      header = null;
-      break;
-    case RECOMMENDATION_TYPE_CMS:
-      header = null;
-      break;
-    default:
-      header = null;
-  }
+  const headerProps = settings || productPage;
+  // TODO: cart page
 
-  const productIds = productLimit ?
-    products.map(p => p.id).slice(0, productLimit) :
-    products.map(p => p.id);
+  const productIds = products.map(p => p.id);
+
+  const {
+    CTABackgroundColor,
+    CTAColor,
+    CTAText,
+  } = settings || {};
 
   return (
     <div className={wrapper}>
-      {header}
+      <Header {...headerProps} />
       <ProductSlider productIds={productIds} />
+      {CTAText && ((
+        <Button
+          className={styles.button(CTABackgroundColor, CTAColor)}
+          onClick={() => push({ pathname: RECOMMENDATIONS_PATH })}
+        >
+          {CTAText}
+        </Button>))
+      }
     </div>
   );
 };
 
 Slider.propTypes = {
-  productLimit: PropTypes.number,
   products: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
     ]),
   })),
+  settings: PropTypes.shape(),
   type: PropTypes.string,
 };
 
 Slider.defaultProps = {
   products: null,
-  productLimit: null,
   type: null,
+  settings: null,
 };
 
 export default Slider;

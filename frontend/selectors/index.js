@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect';
 import {
-  RECOMMENDATION_TYPE_CART,
   RECOMMENDATION_TYPE_PRODUCT,
   RECOMMENDATION_TYPE_USER,
 } from '../constants';
@@ -31,14 +30,10 @@ export const getRecommendationsStateForType = createSelector(
 
 export const getRecommendationsForType = createSelector(
   getRecommendationsStateForType,
-  recommendationsState => recommendationsState ? recommendationsState.products : null
+  (state, { limit }) => limit,
+  (recommendationsState, limit) =>
+    recommendationsState && recommendationsState.products ? recommendationsState.products.slice(0, limit) : null
 );
 
 export const getUserRecommendations = state =>
   getRecommendationsForType(state, { type: RECOMMENDATION_TYPE_USER });
-
-export const getCartRecommendations = state =>
-  getRecommendationsForType(state, { type: RECOMMENDATION_TYPE_CART });
-
-export const getProductRecommendations = (state, { id }) =>
-  getRecommendationsForType(state, { type: RECOMMENDATION_TYPE_PRODUCT, id });

@@ -3,8 +3,8 @@
   "id": "@shopgate-project/product-recommendations",
   "components": [
     {
-      "id": "CMSProductRecommendations",
-      "path": "frontend/widgets/CMSProductRecommendations/index.jsx",
+      "id": "ProductRecommendations",
+      "path": "frontend/widgets/ProductRecommendations/index.jsx",
       "type": "widgets",
       "description": "Custom widget for recommended products on a CMS page"
     },

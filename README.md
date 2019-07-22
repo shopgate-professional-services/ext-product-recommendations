@@ -5,15 +5,16 @@ Extension will display retrieved product pipeline data from external providers. 
 ```
 <!--Widget
 {
-  "type": "@shopgate-project/product-recommendations/CMSProductRecommendations",
+  "type": "@shopgate-project/product-recommendations/ProductRecommendations",
   "settings": {
-    "text": "Home Page Recommendation",
-	"h3Title": "PRODUKTEMPFEHLUNGEN",
-	"h2Text": "Deine personliche Auswahl",
-	"productLimit": 6,
+	"h3": "PRODUKTEMPFEHLUNGEN",
+	"h2": "Deine personliche Auswahl",
+	"background": "#fff",
+	"textColor": "#000",
+	"limit": 6,
 	"CTABackgroundColor": "green",
 	"CTAColor": "white",
-	"CTAText": "Zudeinen Empfehlungen"
+	"CTAText": "Zu deinen Empfehlungen"
   }
 }
 -->

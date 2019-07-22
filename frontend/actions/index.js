@@ -1,6 +1,5 @@
 import { logger } from '@shopgate/pwa-core/helpers';
 import PipelineRequest from '@shopgate/pwa-core/classes/PipelineRequest';
-import { fetchProductsById } from '@shopgate/pwa-common-commerce/product';
 import { shouldFetchData } from '@shopgate/pwa-common/helpers/redux';
 import receiveProducts from '@shopgate/pwa-common-commerce/product/action-creators/receiveProducts';
 import { LoadingProvider } from '@shopgate/pwa-common/providers';
@@ -11,8 +10,6 @@ import {
   errorRecommendations,
 } from '../action-creators';
 import {
-  RECOMMENDATION_TYPE_CART,
-  RECOMMENDATION_TYPE_PRODUCT,
   RECOMMENDATION_TYPE_USER,
   RECOMMENDATIONS_PATH,
 } from '../constants';
@@ -20,10 +17,9 @@ import {
 /**
  * @param {string} type type to request
  * @param {string} id id
- * @param {number} productLimit product limit for slider
  * @returns {Function}
  */
-export const fetchRecommendations = (type, id = null, productLimit = null) => (dispatch, getState) => {
+export const fetchRecommendations = (type, id = null) => (dispatch, getState) => {
   const state = getState();
   const recommendations = getRecommendationsStateForType(state, { type, id });
 

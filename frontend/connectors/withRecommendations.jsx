@@ -8,7 +8,7 @@ import { fetchRecommendations } from '../actions';
 const WithRecommendations = ({
   type,
   id,
-  productLimit,
+  limit,
   WrappedComponent,
   products,
   // eslint-disable-next-line no-shadow
@@ -20,7 +20,7 @@ const WithRecommendations = ({
   }, [type, id]);
   return (<WrappedComponent
     products={products}
-    productLimit={productLimit}
+    limit={limit}
     type={type}
     {...props}
   />);
@@ -28,18 +28,19 @@ const WithRecommendations = ({
 
 WithRecommendations.propTypes = {
   fetchRecommendations: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   type: PropTypes.string.isRequired,
   WrappedComponent: PropTypes.func.isRequired,
-  productLimit: PropTypes.number,
+  limit: PropTypes.number,
   products: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
   })),
 };
 
 WithRecommendations.defaultProps = {
-  productLimit: null,
+  limit: undefined,
   products: null,
+  id: null,
 };
 
 /**

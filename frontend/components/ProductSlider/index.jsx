@@ -7,15 +7,19 @@ import withRecommendations from '../../connectors/withRecommendations';
  * General Product Slider component.
  * @param {string} type Type.
  * @param {string} id Id.
+ * @param {Object} settings widget settings.
  * @returns {JSX}
  */
-const ProductSlider = ({ type, id, productLimit }) => {
+const ProductSlider = ({
+  type, id, limit, settings,
+}) => {
   const ConnectedSlider = withRecommendations(
     Slider,
     {
       type,
       id,
-      productLimit,
+      limit,
+      settings,
     }
   );
 
@@ -23,13 +27,16 @@ const ProductSlider = ({ type, id, productLimit }) => {
 };
 
 ProductSlider.propTypes = {
-  id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  productLimit: PropTypes.number,
+  id: PropTypes.string,
+  limit: PropTypes.number,
+  settings: PropTypes.shape(),
 };
 
 ProductSlider.defaultProps = {
-  productLimit: null,
+  limit: undefined,
+  settings: null,
+  id: null,
 };
 
 export default ProductSlider;
