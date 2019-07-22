@@ -51,13 +51,27 @@
       "type": "admin",
       "destination": "frontend",
       "default": {
-        "h2": "Headline 2",
-        "h3": "Headline 3",
-        "background": "yellow",
-        "textColor": "blue"
+        "h2": "",
+        "h3": "",
+        "background": "",
+        "textColor": ""
       },
       "params": {
-        "label": "Config for the recommendation page",
+        "label": "Config for the product page",
+        "type": "json"
+      }
+    },
+    "cartPage": {
+      "type": "admin",
+      "destination": "frontend",
+      "default": {
+        "h2": "",
+        "h3": "",
+        "background": "",
+        "textColor": ""
+      },
+      "params": {
+        "label": "Config for the cart page",
         "type": "json"
       }
     }

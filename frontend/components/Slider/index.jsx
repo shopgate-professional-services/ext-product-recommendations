@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { useTheme, useNavigation } from '@shopgate/engage/core';
 import { Button } from '@shopgate/engage/components';
 import { css } from 'glamor';
-import { RECOMMENDATIONS_PATH } from '../../constants';
-import { productPage } from '../../config';
+import { RECOMMENDATIONS_PATH, RECOMMENDATION_TYPE_CART } from '../../constants';
+import { productPage, cartPage } from '../../config';
 import Header from '../Header';
 import styles from './style';
 
@@ -24,8 +24,7 @@ const Slider = ({ products, type, settings }) => {
   const { ProductSlider } = useTheme();
   const { push } = useNavigation();
 
-  const headerProps = settings || productPage;
-  // TODO: cart page
+  const headerProps = settings || (type === RECOMMENDATION_TYPE_CART ? cartPage : productPage);
 
   const productIds = products.map(p => p.id);
 

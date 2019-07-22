@@ -7,9 +7,15 @@
     "textColor": ""
   },
   "productPage": {
-    "h2": "Headline 2",
-    "h3": "Headline 3",
-    "background": "yellow",
-    "textColor": "blue"
+    "h2": "",
+    "h3": "",
+    "background": "",
+    "textColor": ""
+  },
+  "cartPage": {
+    "h2": "",
+    "h3": "",
+    "background": "",
+    "textColor": ""
   }
 }
