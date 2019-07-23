@@ -10,13 +10,14 @@ import { RECOMMENDATION_TYPE_CART, RECOMMENDATION_TYPE_PRODUCT } from '../../con
  */
 const ProductTaxDisclaimerAfter = () => {
   const { pathname } = useRoute();
-  const { productId } = useCurrentProduct();
 
   if (pathname === CART_PATH) {
     return (
       <ProductSlider type={RECOMMENDATION_TYPE_CART} />
     );
   }
+
+  const { productId } = useCurrentProduct() || {};
 
   return (
     <ProductSlider type={RECOMMENDATION_TYPE_PRODUCT} id={productId} />
