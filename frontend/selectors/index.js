@@ -32,7 +32,8 @@ export const getRecommendationsForType = createSelector(
   getRecommendationsStateForType,
   (state, { limit }) => limit,
   (recommendationsState, limit) =>
-    recommendationsState && recommendationsState.products ? recommendationsState.products.slice(0, limit) : null
+    (recommendationsState && recommendationsState.products ?
+      recommendationsState.products.slice(0, limit) : null)
 );
 
 export const getUserRecommendations = state =>
