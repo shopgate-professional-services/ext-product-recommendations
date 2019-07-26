@@ -18,7 +18,7 @@ const wrapper = css({
  * @returns {JSX}
  */
 const Slider = ({ products, type, settings }) => {
-  if (!products || !products.length) {
+  if (!products || !products.length) {
     return null;
   }
   const { ProductSlider } = useTheme();
