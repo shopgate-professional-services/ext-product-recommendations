@@ -8,7 +8,7 @@ Extension will display retrieved product pipeline data from external providers. 
   "type": "@shopgate-project/product-recommendations/ProductRecommendations",
   "settings": {
 	"h3": "PRODUKTEMPFEHLUNGEN",
-	"h2": "Deine personliche Auswahl",
+	"h2": "Deine<br> personliche<br> Auswahl",
 	"background": "#fff",
 	"textColor": "#000",
 	"limit": 6,
@@ -26,8 +26,8 @@ Extension will display retrieved product pipeline data from external providers. 
 Settings for the recommendation page
 
 - `title`: the title of the page (only for recommendationsPage)
-- `h2`: Headline H2 of the header
-- `h3`: Headline H3 of the header
+- `h2`: Headline H2 of the header. You can use html markup here like <br> to force a line break.
+- `h3`: Headline H3 of the header. You can use html markup here like <br> to force a line break
 - `background`: CSS value for the background property of the header (e.g `#fff`, `url("header.png")`)
 - `textColor`: Text color in the header (e.g `#000`)
 

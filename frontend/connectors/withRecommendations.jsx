@@ -28,9 +28,9 @@ const WithRecommendations = ({
 
 WithRecommendations.propTypes = {
   fetchRecommendations: PropTypes.func.isRequired,
-  id: PropTypes.string,
   type: PropTypes.string.isRequired,
   WrappedComponent: PropTypes.func.isRequired,
+  id: PropTypes.string,
   limit: PropTypes.number,
   products: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,

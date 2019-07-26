@@ -11,6 +11,8 @@ const button = (CTABackgroundColor, CTAColor) => css({
   color: `${CTAColor} !important`,
   marginLeft: 'auto !important',
   marginRight: 'auto !important',
+  marginTop: 25,
+  marginBottom: 5,
 }).toString();
 
 export default {

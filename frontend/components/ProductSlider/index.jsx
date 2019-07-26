@@ -30,7 +30,16 @@ ProductSlider.propTypes = {
   type: PropTypes.string.isRequired,
   id: PropTypes.string,
   limit: PropTypes.number,
-  settings: PropTypes.shape(),
+  settings: PropTypes.shape({
+    h3: PropTypes.string,
+    h2: PropTypes.string,
+    background: PropTypes.string,
+    textColor: PropTypes.string,
+    limit: PropTypes.number,
+    CTABackgroundColor: PropTypes.string,
+    CTAColor: PropTypes.string,
+    CTAText: PropTypes.string,
+  }),
 };
 
 ProductSlider.defaultProps = {

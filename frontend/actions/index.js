@@ -24,12 +24,11 @@ export const fetchRecommendations = (type, id = null) => (dispatch, getState) =>
   const recommendations = getRecommendationsStateForType(state, { type, id });
 
   if (!shouldFetchData(recommendations)) {
-    return;
+    return Promise.resolve();
   }
 
   dispatch(requestRecommendations({ id, type }));
 
-  // eslint-disable-next-line consistent-return
   return new PipelineRequest('shopgate.getProductRecommendations')
     .setInput({ id, type })
     .dispatch()

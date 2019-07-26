@@ -8,7 +8,7 @@ import { css } from 'glamor';
 const wrapper = (background, color) => css({
   background,
   color,
-  padding: '25px 30px 0',
+  padding: '20px 30px 0',
 });
 
 const h3 = css({
