@@ -19,6 +19,10 @@ const ProductTaxDisclaimerAfter = () => {
 
   const { productId } = useCurrentProduct() || {};
 
+  if (!productId) {
+    return null;
+  }
+
   return (
     <ProductSlider type={RECOMMENDATION_TYPE_PRODUCT} id={productId} />
   );

@@ -8,15 +8,18 @@ import { css } from 'glamor';
 const wrapper = (background, color) => css({
   background,
   color,
-  padding: '20px 30px 0',
+  padding: '20px 30px 10px',
+  letterSpacing: '-0.01em',
 });
 
 const h3 = css({
   fontSize: 13,
+  lineHeight: '16px',
 });
 
 const h2 = css({
   fontSize: 24,
+  lineHeight: '29px',
   marginTop: 0,
 });
 
