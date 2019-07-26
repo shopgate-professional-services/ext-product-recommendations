@@ -2,8 +2,78 @@
   "version": "0.1.0",
   "id": "@shopgate-project/product-recommendations",
   "components": [
-    
+    {
+      "id": "ProductRecommendations",
+      "path": "frontend/widgets/ProductRecommendations/index.jsx",
+      "type": "widgets",
+      "description": "Custom widget for recommended products on a CMS page"
+    },
+    {
+      "id": "recommendations",
+      "path": "frontend/pages/Recommendations/index.jsx",
+      "target": "app.routes",
+      "type": "portals"
+    },
+    {
+      "id": "recommendationsByType",
+      "path": "frontend/reducers/index.js",
+      "type": "reducers"
+    },
+    {
+      "id": "Subscribers",
+      "path": "frontend/subscriptions/index.js",
+      "type": "subscribers"
+    },
+    {
+      "id": "ProductTaxDisclaimerAfter",
+      "path": "frontend/portals/ProductTaxDisclaimerAfter/index.jsx",
+      "target": "product.tax-disclaimer.after",
+      "type": "portals"
+    }
   ],
   "configuration": {
+    "recommendationsPage": {
+      "type": "admin",
+      "destination": "frontend",
+      "default": {
+        "title": "",
+        "h2": "",
+        "h3": "",
+        "background": "",
+        "textColor": ""
+      },
+      "params": {
+        "label": "Config for the recommendation page",
+        "type": "json"
+      }
+    },
+    "productPage": {
+      "type": "admin",
+      "destination": "frontend",
+      "default": {
+        "h2": "",
+        "h3": "",
+        "background": "",
+        "textColor": ""
+      },
+      "params": {
+        "label": "Config for the product page",
+        "type": "json"
+      }
+    },
+    "cartPage": {
+      "type": "admin",
+      "destination": "frontend",
+      "default": {
+        "h2": "",
+        "h3": "",
+        "background": "",
+        "textColor": ""
+      },
+      "params": {
+        "label": "Config for the cart page",
+        "type": "json"
+      }
+    }
   }
 }

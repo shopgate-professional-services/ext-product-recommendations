@@ -1,35 +1,56 @@
 import { logger } from '@shopgate/pwa-core/helpers';
 import PipelineRequest from '@shopgate/pwa-core/classes/PipelineRequest';
 import { shouldFetchData } from '@shopgate/pwa-common/helpers/redux';
-import { getDummies } from '../selectors';
+import receiveProducts from '@shopgate/pwa-common-commerce/product/action-creators/receiveProducts';
+import { LoadingProvider } from '@shopgate/pwa-common/providers';
+import { getRecommendationsStateForType } from '../selectors';
 import {
-  errorDummies,
-  receiveDummies,
-  requestDummies,
+  requestRecommendations,
+  receiveRecommendations,
+  errorRecommendations,
 } from '../action-creators';
+import {
+  RECOMMENDATION_TYPE_USER,
+  RECOMMENDATIONS_PATH,
+} from '../constants';
 
 /**
- * Get product swatches action.
- * @param {string} dummyId dummyId
+ * @param {string} type type to request
+ * @param {string} id id
  * @returns {Function}
  */
-export const fetchDummies = dummyId => (dispatch, getState) => {
+export const fetchRecommendations = (type, id = null) => (dispatch, getState) => {
   const state = getState();
-  const dummies = getDummies(state, dummyId);
+  const recommendations = getRecommendationsStateForType(state, { type, id });
 
-  if (!shouldFetchData(dummies)) {
-    return;
+  if (!shouldFetchData(recommendations)) {
+    return Promise.resolve();
   }
 
-  dispatch(requestDummies(dummyId));
+  dispatch(requestRecommendations({ id, type }));
 
-  new PipelineRequest('dummy')
+  return new PipelineRequest('shopgate.getProductRecommendations')
+    .setInput({ id, type })
     .dispatch()
-    .then((response) => {
-      dispatch(receiveDummies(dummyId, response));
+    .then(({ products }) => {
+      dispatch(receiveRecommendations({ id, type, products }));
+      dispatch(receiveProducts({
+        products,
+      }));
     })
     .catch((err) => {
       logger.error(err);
-      dispatch(errorDummies(dummyId));
+      dispatch(errorRecommendations({ id, type }));
     });
+};
+
+/**
+ * @returns {Function}
+ */
+export const fetchUserRecommendations = () => async (dispatch) => {
+  LoadingProvider.setLoading(RECOMMENDATIONS_PATH);
+
+  await dispatch(fetchRecommendations(RECOMMENDATION_TYPE_USER));
+
+  LoadingProvider.unsetLoading(RECOMMENDATIONS_PATH);
 };

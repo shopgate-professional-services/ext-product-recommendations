@@ -4,18 +4,8 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.0.0] - 2019-07-15
 ### Added
-### Changed
-### Fixed
-### Removed
+- First implementation
+- Added configurable widget to display Recommended product slider teaser and contains a button link to recommendations page.
 
-## [1.0.0] - YYYY-MM-DD
-### Added
-### Changed
-### Fixed
-### Removed
-
-
-[Unreleased]: https://github.com/shopgate/ext-cliplister/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/shopgate/ext-cliplister/compare/v0.0.1...v1.0.0

@@ -1,4 +1,6 @@
 import { connect } from 'react-redux';
+import { fetchUserRecommendations } from '../../actions';
+import { getUserRecommendations } from '../../selectors';
 
 /**
  * Maps state to props.
@@ -6,14 +8,16 @@ import { connect } from 'react-redux';
  * @returns {Object}
  */
 const mapStateToProps = state => ({
+  products: getUserRecommendations(state),
 });
 
 /**
  * Maps dispatch to props.
- * @param {Function} dispatch Dispatch.
+ * @param {function} dispatch Dispatch.
  * @returns {Object}
  */
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = ({
+  fetchUserRecommendations,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps);

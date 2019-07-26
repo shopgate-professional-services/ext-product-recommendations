@@ -1,37 +1,32 @@
 import {
-  RECEIVE_DUMMIES,
-  REQUEST_DUMMIES,
-  ERROR_DUMMIES,
+  RECEIVE_RECOMMENDATIONS,
+  REQUEST_RECOMMENDATIONS,
+  ERROR_RECOMMENDATIONS,
 } from '../constants';
 
 /**
- * RequestDummies action.
- * @param {string} dummyId dummyId.
+ * @param {Object} payload payload
  * @returns {Object}
  */
-export const requestDummies = dummyId => ({
-  type: REQUEST_DUMMIES,
-  dummyId,
+export const requestRecommendations = payload => ({
+  type: REQUEST_RECOMMENDATIONS,
+  payload,
 });
 
 /**
- * ReceiveDummies action.
- * @param {string} dummyId dummyId.
- * @param {Array} dummies dummies.
+ * @param {Object} payload payload
  * @returns {Object}
  */
-export const receiveDummies = (dummyId, dummies) => ({
-  type: RECEIVE_DUMMIES,
-  dummyId,
-  dummies,
+export const receiveRecommendations = payload => ({
+  type: RECEIVE_RECOMMENDATIONS,
+  payload,
 });
 
 /**
- * ErrorDummies action.
- * @param {string} dummyId dummyId.
+ * @param {Object} payload payload
  * @returns {Object}
  */
-export const errorDummies = dummyId => ({
-  type: ERROR_DUMMIES,
-  dummyId,
+export const errorRecommendations = payload => ({
+  type: ERROR_RECOMMENDATIONS,
+  payload,
 });

@@ -1,6 +1,11 @@
-export const RECEIVE_DUMMIES = 'RECEIVE_DUMMIES';
-export const REQUEST_DUMMIES = 'REQUEST_DUMMIES';
-export const ERROR_DUMMIES = 'ERROR_DUMMIES';
+export const RECEIVE_RECOMMENDATIONS = 'RECEIVE_RECOMMENDATIONS';
+export const REQUEST_RECOMMENDATIONS = 'REQUEST_RECOMMENDATIONS';
+export const ERROR_RECOMMENDATIONS = 'ERROR_RECOMMENDATIONS';
 
-export const DUMMY_PATH = '/dummy';
+export const RECOMMENDATIONS_PATH = '/recommendations';
 
+export const RECOMMENDATION_TYPE_PRODUCT = 'product';
+export const RECOMMENDATION_TYPE_CART = 'cart';
+export const RECOMMENDATION_TYPE_USER = 'user';
+
+export const REDUX_NAMESPACE_RECOMMENDATIONS_BY_TYPE = '@shopgate-project/product-recommendations/recommendationsByType';
