@@ -1,20 +1,31 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withCurrentProduct } from '@shopgate/engage/core';
+import { useCurrentProduct, useRoute } from '@shopgate/engage/core';
+import { CART_PATH } from '@shopgate/engage/cart';
 import ProductSlider from '../../components/ProductSlider';
-import { RECOMMENDATION_TYPE_PRODUCT } from '../../constants';
+import { RECOMMENDATION_TYPE_CART, RECOMMENDATION_TYPE_PRODUCT } from '../../constants';
 
 /**
  * Product slider on PDP page.
- * @param {string} productId Product id.
  * @returns {JSX}
  */
-const ProductTaxDisclaimerAfter = ({ productId }) => (
-  <ProductSlider type={RECOMMENDATION_TYPE_PRODUCT} id={productId} />
-);
+const ProductTaxDisclaimerAfter = () => {
+  const { pathname } = useRoute();
 
-ProductTaxDisclaimerAfter.propTypes = {
-  productId: PropTypes.string.isRequired,
+  if (pathname === CART_PATH) {
+    return (
+      <ProductSlider type={RECOMMENDATION_TYPE_CART} />
+    );
+  }
+
+  const { productId } = useCurrentProduct() || {};
+
+  if (!productId) {
+    return null;
+  }
+
+  return (
+    <ProductSlider type={RECOMMENDATION_TYPE_PRODUCT} id={productId} />
+  );
 };
 
-export default withCurrentProduct(ProductTaxDisclaimerAfter);
+export default ProductTaxDisclaimerAfter;

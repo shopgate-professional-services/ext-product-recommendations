@@ -16,8 +16,8 @@ const Header = ({
 
   return (
     <div className={styles.wrapper(background, textColor)}>
-      {h3 && (<h3 className={styles.h3}>{h3}</h3>)}
-      {h2 && (<h2 className={styles.h2}>{h2}</h2>)}
+      {h3 && (<h3 className={styles.h3} dangerouslySetInnerHTML={{__html: h3}}></h3>)}
+      {h2 && (<h2 className={styles.h2} dangerouslySetInnerHTML={{__html: h2}}></h2>)}
     </div>
   );
 };

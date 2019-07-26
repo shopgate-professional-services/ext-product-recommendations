@@ -10,18 +10,21 @@ import {
   errorRecommendations,
 } from '../action-creators';
 import {
-  RECOMMENDATION_TYPE_CART,
-  RECOMMENDATION_TYPE_PRODUCT,
   RECOMMENDATION_TYPE_USER,
   RECOMMENDATIONS_PATH,
 } from '../constants';
 
+/**
+ * @param {string} type type to request
+ * @param {string} id id
+ * @returns {Function}
+ */
 export const fetchRecommendations = (type, id = null) => (dispatch, getState) => {
   const state = getState();
   const recommendations = getRecommendationsStateForType(state, { type, id });
 
   if (!shouldFetchData(recommendations)) {
-    return;
+    return Promise.resolve();
   }
 
   dispatch(requestRecommendations({ id, type }));
@@ -31,7 +34,6 @@ export const fetchRecommendations = (type, id = null) => (dispatch, getState) =>
     .dispatch()
     .then(({ products }) => {
       dispatch(receiveRecommendations({ id, type, products }));
-
       dispatch(receiveProducts({
         products,
       }));
@@ -42,6 +44,9 @@ export const fetchRecommendations = (type, id = null) => (dispatch, getState) =>
     });
 };
 
+/**
+ * @returns {Function}
+ */
 export const fetchUserRecommendations = () => async (dispatch) => {
   LoadingProvider.setLoading(RECOMMENDATIONS_PATH);
 
