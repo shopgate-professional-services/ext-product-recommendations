@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.2] - 2019-09-03
+### Added
+- Configurable portal positions
+
 ## [1.0.1] - 2019-08-19
 ### Fixed
 - Set PWA dependency to 6.7
@@ -12,4 +16,3 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Added
 - First implementation
 - Added configurable widget to display Recommended product slider teaser and contains a button link to recommendations page.
-
