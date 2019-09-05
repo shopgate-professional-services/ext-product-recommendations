@@ -30,6 +30,12 @@ Settings for the recommendation page
 - `h3`: Headline H3 of the header. You can use html markup here like <br> to force a line break
 - `background`: CSS value for the background property of the header (e.g `#fff`, `url("header.png")`)
 - `textColor`: Text color in the header (e.g `#000`)
+- `position`: Portal position. If empty no slider is rendered on Product or Cart Page.<br>Possible portal positions:<br>
+	- `product.header.after`
+	- `product.description.after`
+	- `product.reviews.after`
+	- `cart.coupon-field.before`
+	- `cart.coupon-field.after`
 
 ## About Shopgate
 

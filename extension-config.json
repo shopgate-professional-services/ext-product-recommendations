@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
+  "version": "1.1.0",
   "id": "@shopgate-project/product-recommendations",
   "components": [
     {
@@ -15,6 +15,36 @@
       "type": "portals"
     },
     {
+      "id": "PDPHeaderAfter",
+      "type": "portals",
+      "path": "frontend/portals/Recommendations",
+      "target": "product.header.after"
+    },
+    {
+      "id": "PDPDescriptionAfter",
+      "type": "portals",
+      "path": "frontend/portals/Recommendations",
+      "target": "product.description.after"
+    },
+    {
+      "id": "PDPReviewAfter",
+      "type": "portals",
+      "path": "frontend/portals/Recommendations",
+      "target": "product.reviews.after"
+    },
+    {
+      "id": "CartCouponFieldBefore",
+      "type": "portals",
+      "path": "frontend/portals/Recommendations",
+      "target": "cart.coupon-field.before"
+    },
+    {
+      "id": "CartCouponFieldAfter",
+      "type": "portals",
+      "path": "frontend/portals/Recommendations",
+      "target": "cart.coupon-field.after"
+    },
+    {
       "id": "recommendationsByType",
       "path": "frontend/reducers/index.js",
       "type": "reducers"
@@ -23,12 +53,6 @@
       "id": "Subscribers",
       "path": "frontend/subscriptions/index.js",
       "type": "subscribers"
-    },
-    {
-      "id": "ProductTaxDisclaimerAfter",
-      "path": "frontend/portals/ProductTaxDisclaimerAfter/index.jsx",
-      "target": "product.tax-disclaimer.after",
-      "type": "portals"
     }
   ],
   "configuration": {
@@ -54,7 +78,8 @@
         "h2": "",
         "h3": "",
         "background": "",
-        "textColor": ""
+        "textColor": "",
+        "position": ""
       },
       "params": {
         "label": "Config for the product page",
@@ -68,7 +93,8 @@
         "h2": "",
         "h3": "",
         "background": "",
-        "textColor": ""
+        "textColor": "",
+        "position": ""
       },
       "params": {
         "label": "Config for the cart page",
