@@ -20,14 +20,14 @@ const Recommendations = ({ name }) => {
     );
   }
 
-  const { productId } = useCurrentProduct() || {};
-
-  if (!productId) {
+  // PDP Portal position is different than configured.
+  if (name !== productPage.position) {
     return null;
   }
 
-  // PDP Portal position is different than configured.
-  if (name !== productPage.position) {
+  const { productId } = useCurrentProduct() || {};
+
+  if (!productId) {
     return null;
   }
 
