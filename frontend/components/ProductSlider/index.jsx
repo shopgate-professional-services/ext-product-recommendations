@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Slider from '../Slider';
 import withRecommendations from '../../connectors/withRecommendations';
@@ -13,6 +13,14 @@ import withRecommendations from '../../connectors/withRecommendations';
 const ProductSlider = ({
   type, id, limit, settings,
 }) => {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setReady(true);
+    }, 1);
+    return () => clearTimeout(timer);
+  });
+
   const ConnectedSlider = withRecommendations(
     Slider,
     {
@@ -23,7 +31,13 @@ const ProductSlider = ({
     }
   );
 
-  return <ConnectedSlider />;
+  if (!ready) {
+    return null;
+  }
+
+  return (
+    <ConnectedSlider />
+  );
 };
 
 ProductSlider.propTypes = {
