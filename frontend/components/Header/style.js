@@ -9,6 +9,7 @@ const wrapper = (background, color) => css({
   background,
   color,
   padding: '20px 30px 10px',
+  marginBottom: 10,
   letterSpacing: '-0.01em',
 });
 
