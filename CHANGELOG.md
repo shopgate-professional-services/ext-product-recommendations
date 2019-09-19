@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.2] - 2019-09-19
+### Fixed
+* Added timeout to allow react-id-swiper to apply styling on PDP
+
 ## [1.1.1] - 2019-09-17
 ### Changed
 - Changed styling (spaces between Header and CTA Button).
