@@ -3,6 +3,7 @@ import {
   RECEIVE_RECOMMENDATIONS,
   REQUEST_RECOMMENDATIONS,
   RECOMMENDATION_TYPE_PRODUCT,
+  CLEAR_RECOMMENDATIONS,
 } from '../constants';
 
 /**
@@ -50,6 +51,7 @@ const recommendationsByType = (
         expires: Date.now() + 3600000,
       });
     case ERROR_RECOMMENDATIONS:
+    case CLEAR_RECOMMENDATIONS:
       return wrapData(state, payload, {
         isFetching: false,
         expires: 0,

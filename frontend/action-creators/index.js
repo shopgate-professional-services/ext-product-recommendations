@@ -2,6 +2,7 @@ import {
   RECEIVE_RECOMMENDATIONS,
   REQUEST_RECOMMENDATIONS,
   ERROR_RECOMMENDATIONS,
+  CLEAR_RECOMMENDATIONS,
 } from '../constants';
 
 /**
@@ -29,4 +30,16 @@ export const receiveRecommendations = payload => ({
 export const errorRecommendations = payload => ({
   type: ERROR_RECOMMENDATIONS,
   payload,
+});
+
+/**
+ * @param {string} type type
+ * @returns {Object}
+ */
+export const clearRecommendations = type => ({
+  type: CLEAR_RECOMMENDATIONS,
+  payload: {
+    type,
+    data: null,
+  },
 });
