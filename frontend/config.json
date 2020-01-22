@@ -10,12 +10,14 @@
     "h2": "",
     "h3": "",
     "background": "",
-    "textColor": ""
+    "textColor": "",
+    "position": ""
   },
   "cartPage": {
     "h2": "",
     "h3": "",
     "background": "",
-    "textColor": ""
+    "textColor": "",
+    "position": ""
   }
 }
