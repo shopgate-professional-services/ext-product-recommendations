@@ -23,7 +23,9 @@ const ProductSlider = ({
     }
   );
 
-  return <ConnectedSlider />;
+  return (
+    <ConnectedSlider />
+  );
 };
 
 ProductSlider.propTypes = {
