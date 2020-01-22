@@ -51,10 +51,6 @@ const recommendationsByType = (
         expires: Date.now() + 3600000,
       });
     case ERROR_RECOMMENDATIONS:
-      return wrapData(state, payload, {
-        isFetching: false,
-        expires: 0,
-      });
     case CLEAR_RECOMMENDATIONS:
       return wrapData(state, payload, {
         isFetching: false,
