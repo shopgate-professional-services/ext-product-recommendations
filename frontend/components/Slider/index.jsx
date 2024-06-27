@@ -18,11 +18,12 @@ const wrapper = css({
  * @returns {JSX}
  */
 const Slider = ({ products, type, settings }) => {
+  const { ProductSlider } = useTheme();
+  const { push } = useNavigation();
+
   if (!products || !products.length) {
     return null;
   }
-  const { ProductSlider } = useTheme();
-  const { push } = useNavigation();
 
   const headerProps = settings || (type === RECOMMENDATION_TYPE_CART ? cartPage : productPage);
 
