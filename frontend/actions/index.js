@@ -17,32 +17,54 @@ import {
 /**
  * @param {string} type type to request
  * @param {string} id id
+ * @param {Object} requestOptions options to customize the request
  * @returns {Function}
  */
-export const fetchRecommendations = (type, id = null) => (dispatch, getState) => {
-  const state = getState();
-  const recommendations = getRecommendationsStateForType(state, { type, id });
-
-  if (!shouldFetchData(recommendations)) {
-    return Promise.resolve();
-  }
-
-  dispatch(requestRecommendations({ id, type }));
-
-  return new PipelineRequest('shopgate.getProductRecommendations')
-    .setInput({ id, type })
-    .dispatch()
-    .then(({ products }) => {
-      dispatch(receiveRecommendations({ id, type, products }));
-      dispatch(receiveProducts({
-        products,
-      }));
-    })
-    .catch((err) => {
-      logger.error(err);
-      dispatch(errorRecommendations({ id, type }));
+export const fetchRecommendations = (type, id = null, requestOptions = null) =>
+  (dispatch, getState) => {
+    const state = getState();
+    const recommendations = getRecommendationsStateForType(state, {
+      type,
+      id,
+      requestOptions,
     });
-};
+
+    if (!shouldFetchData(recommendations)) {
+      return Promise.resolve();
+    }
+
+    dispatch(requestRecommendations({
+      id,
+      type,
+      requestOptions,
+    }));
+
+    return new PipelineRequest('shopgate.getProductRecommendations')
+      .setInput({
+        id,
+        type,
+        requestOptions,
+      })
+      .dispatch()
+      .then(({ products }) => {
+        dispatch(receiveRecommendations({
+          id,
+          type,
+          products,
+          requestOptions,
+        }));
+        dispatch(receiveProducts({
+          products,
+        }));
+      })
+      .catch((err) => {
+        logger.error(err);
+        dispatch(errorRecommendations({
+          id,
+          type,
+        }));
+      });
+  };
 
 /**
  * @returns {Function}

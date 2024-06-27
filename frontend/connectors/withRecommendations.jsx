@@ -13,11 +13,13 @@ const WithRecommendations = ({
   products,
   // eslint-disable-next-line no-shadow
   fetchRecommendations,
+  requestOptions,
   ...props
 }) => {
   useEffect(() => {
-    fetchRecommendations(type, id);
-  }, [type, id]);
+    fetchRecommendations(type, id, requestOptions);
+  }, [type, id, requestOptions, fetchRecommendations]);
+
   return (<WrappedComponent
     products={products}
     limit={limit}
@@ -35,12 +37,14 @@ WithRecommendations.propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
   })),
+  requestOptions: PropTypes.shape(),
 };
 
 WithRecommendations.defaultProps = {
   limit: undefined,
   products: null,
   id: null,
+  requestOptions: null,
 };
 
 /**

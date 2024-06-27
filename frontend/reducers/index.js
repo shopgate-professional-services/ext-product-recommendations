@@ -3,6 +3,7 @@ import {
   RECEIVE_RECOMMENDATIONS,
   REQUEST_RECOMMENDATIONS,
   RECOMMENDATION_TYPE_PRODUCT,
+  RECOMMENDATION_TYPE_PAGE,
   CLEAR_RECOMMENDATIONS,
 } from '../constants';
 
@@ -23,6 +24,13 @@ const wrapData = (state, payload, data) => {
     returnData[payload.type] = {
       ...state[payload.type],
       [payload.id]: data,
+    };
+  }
+
+  if (payload.requestOptions?.pattern && payload.type === RECOMMENDATION_TYPE_PAGE) {
+    returnData[payload.type] = {
+      ...state[payload.type],
+      [payload.requestOptions.pattern]: data,
     };
   }
 
