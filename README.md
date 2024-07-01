@@ -59,7 +59,7 @@ Possible portal positions:
 	- `no-results.content.after`
 
 ## Config example with request options:
-```html
+```json
 {
   "recommendationsPage": {
     "title": "",

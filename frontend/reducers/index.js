@@ -27,7 +27,11 @@ const wrapData = (state, payload, data) => {
     };
   }
 
-  if (payload.requestOptions?.pattern && payload.type === RECOMMENDATION_TYPE_PAGE) {
+  if (
+    payload.requestOptions &&
+    payload.requestOptions.pattern &&
+    payload.type === RECOMMENDATION_TYPE_PAGE
+  ) {
     returnData[payload.type] = {
       ...state[payload.type],
       [payload.requestOptions.pattern]: data,
