@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useCurrentProduct, useRoute } from '@shopgate/engage/core';
 import { CART_PATH } from '@shopgate/engage/cart';
 import { CATEGORY_PATTERN } from '@shopgate/engage/category';
+import { SEARCH_PATTERN } from '@shopgate/engage/search';
 import ProductSlider from '../../components/ProductSlider';
 import {
   RECOMMENDATION_TYPE_CART,
@@ -31,9 +32,12 @@ const Recommendations = ({ name }) => {
     const options = requestOptions.find(
       option => option.position === name && option.pattern === pattern
     );
-
     // Product lists
-    if (options?.pattern === CATEGORY_PATTERN || options?.pattern === BROWSE_PATH) {
+    if (
+      options?.pattern === CATEGORY_PATTERN ||
+      options?.pattern === BROWSE_PATH ||
+      options?.pattern === SEARCH_PATTERN
+    ) {
       return (
         <ProductSlider type={RECOMMENDATION_TYPE_PAGE} requestOptions={options} />
       );
