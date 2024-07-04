@@ -39,12 +39,14 @@ export const fetchRecommendations = (type, id = null, requestOptions = null) =>
       requestOptions,
     }));
 
+    const inputParams = {
+      id,
+      type,
+      ...(requestOptions && { requestOptions }),
+    };
+
     return new PipelineRequest('shopgate.getProductRecommendations')
-      .setInput({
-        id,
-        type,
-        requestOptions,
-      })
+      .setInput(inputParams)
       .dispatch()
       .then(({ products }) => {
         dispatch(receiveRecommendations({
