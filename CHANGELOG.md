@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [1.3.0] - 2024-06-27
 ## Added
-- Options to customize the the `getProductRecommendations` request
+- Options to customize the `getProductRecommendations` request
 
 ## [1.2.1] - 2020-01-22
 ### Fixed

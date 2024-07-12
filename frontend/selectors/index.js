@@ -42,9 +42,30 @@ export const getRecommendationsStateForType = createSelector(
 export const getRecommendationsForType = createSelector(
   getRecommendationsStateForType,
   (state, { limit }) => limit,
-  (recommendationsState, limit) =>
-    (recommendationsState && recommendationsState.products ?
-      recommendationsState.products.slice(0, limit) : null)
+  (state, { requestOptions }) => requestOptions,
+  (recommendationsState, limit, requestOptions) => {
+    if (!recommendationsState) {
+      return null;
+    }
+
+    let products = [];
+
+    const { positions, products: noPositionProducts } = recommendationsState || {};
+    const { position } = requestOptions || {};
+
+    if (positions) {
+      const { products: positionProducts = [] } = positions[position] || {};
+      products = positionProducts;
+    } else {
+      products = noPositionProducts;
+    }
+
+    if (products) {
+      return products.slice(0, limit);
+    }
+
+    return null;
+  }
 );
 
 /**

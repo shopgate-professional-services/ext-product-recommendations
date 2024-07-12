@@ -15,16 +15,42 @@ import {
  * @returns {Object}
  */
 const wrapData = (state, payload, data) => {
-  const returnData = {
-    ...state,
-    [payload.type]: data,
-  };
+  const returnData = { ...state };
+
+  if (
+    payload.type === RECOMMENDATION_TYPE_PRODUCT &&
+    payload.id &&
+    payload.requestOptions &&
+    payload.requestOptions.position
+  ) {
+    const { position } = payload.requestOptions;
+    const existingProduct = state[payload.type]?.[payload.id] || {};
+    const existingPositions = existingProduct.positions || {};
+
+    returnData[payload.type] = {
+      ...state[payload.type],
+      [payload.id]: {
+        ...existingProduct,
+        positions: {
+          ...existingPositions,
+          [position]: {
+            ...existingPositions[position],
+            ...data,
+          },
+        },
+      },
+    };
+
+    return returnData;
+  }
 
   if (payload.id && payload.type === RECOMMENDATION_TYPE_PRODUCT) {
     returnData[payload.type] = {
       ...state[payload.type],
       [payload.id]: data,
     };
+
+    return returnData;
   }
 
   if (
@@ -36,7 +62,13 @@ const wrapData = (state, payload, data) => {
       ...state[payload.type],
       [payload.requestOptions.pattern]: data,
     };
+
+    return returnData;
   }
+
+  returnData[payload.type] = {
+    ...data,
+  };
 
   return returnData;
 };

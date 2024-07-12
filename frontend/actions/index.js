@@ -11,6 +11,7 @@ import {
 } from '../action-creators';
 import {
   RECOMMENDATION_TYPE_USER,
+  RECOMMENDATION_TYPE_PAGE,
   RECOMMENDATIONS_PATH,
 } from '../constants';
 
@@ -23,13 +24,25 @@ import {
 export const fetchRecommendations = (type, id = null, requestOptions = null) =>
   (dispatch, getState) => {
     const state = getState();
+
     const recommendations = getRecommendationsStateForType(state, {
       type,
       id,
       requestOptions,
     });
 
-    if (!shouldFetchData(recommendations)) {
+    if (recommendations?.positions && requestOptions?.position) {
+      const recommWithPositions = recommendations.positions[requestOptions.position];
+
+      if (!shouldFetchData(recommWithPositions)) {
+        return Promise.resolve();
+      }
+    }
+
+    if (
+      (!requestOptions?.position || type === RECOMMENDATION_TYPE_PAGE) &&
+      !shouldFetchData(recommendations)
+    ) {
       return Promise.resolve();
     }
 
