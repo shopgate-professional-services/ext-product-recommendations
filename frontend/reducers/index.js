@@ -3,6 +3,7 @@ import {
   RECEIVE_RECOMMENDATIONS,
   REQUEST_RECOMMENDATIONS,
   RECOMMENDATION_TYPE_PRODUCT,
+  RECOMMENDATION_TYPE_PAGE,
   CLEAR_RECOMMENDATIONS,
 } from '../constants';
 
@@ -14,17 +15,60 @@ import {
  * @returns {Object}
  */
 const wrapData = (state, payload, data) => {
-  const returnData = {
-    ...state,
-    [payload.type]: data,
-  };
+  const returnData = { ...state };
+
+  if (
+    payload.type === RECOMMENDATION_TYPE_PRODUCT &&
+    payload.id &&
+    payload.requestOptions &&
+    payload.requestOptions.position
+  ) {
+    const { position } = payload.requestOptions;
+    const existingProduct = state[payload.type]?.[payload.id] || {};
+    const existingPositions = existingProduct.positions || {};
+
+    returnData[payload.type] = {
+      ...state[payload.type],
+      [payload.id]: {
+        ...existingProduct,
+        positions: {
+          ...existingPositions,
+          [position]: {
+            ...existingPositions[position],
+            ...data,
+          },
+        },
+      },
+    };
+
+    return returnData;
+  }
 
   if (payload.id && payload.type === RECOMMENDATION_TYPE_PRODUCT) {
     returnData[payload.type] = {
       ...state[payload.type],
       [payload.id]: data,
     };
+
+    return returnData;
   }
+
+  if (
+    payload.requestOptions &&
+    payload.requestOptions.pattern &&
+    payload.type === RECOMMENDATION_TYPE_PAGE
+  ) {
+    returnData[payload.type] = {
+      ...state[payload.type],
+      [payload.requestOptions.pattern]: data,
+    };
+
+    return returnData;
+  }
+
+  returnData[payload.type] = {
+    ...data,
+  };
 
   return returnData;
 };

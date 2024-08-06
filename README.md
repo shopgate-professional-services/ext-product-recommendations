@@ -36,6 +36,88 @@ Settings for the recommendation page
 	- `product.reviews.after`
 	- `cart.coupon-field.before`
 	- `cart.coupon-field.after`
+- `requestOptions` (optional): Options to customize the `getProductRecommendations` request and the portal positions. If this array is set, the other configs for `recommendationsPage`, `cartPage` and `productPage` will be ignored. For each option, `position` and `pattern` are mandatory.<br>
+Possible portal positions:
+	- `product.header.after`,
+	- `product.description.before`,
+	- `product.description.after`,
+	- `product.properties.before`,
+	- `product.properties.after`,
+	- `product.reviews.before`,
+	- `product.reviews.after`
+	- `cart.coupon-field.before`,
+	- `cart.coupon-field.after`,
+	- `cart.empty.before`,
+	- `cart.empty.after`
+	- `category.list.before`,
+	- `category.list.after`,
+	- `product.list.before`,
+	- `product.list.after`,
+	- `browse.category-list.before`,
+	- `browse.category-list.after`,
+	- `no-results.content.before`,
+	- `no-results.content.after`
+
+## Config example with request options:
+```json
+{
+  "recommendationsPage": {
+    "title": "",
+    "h2": "",
+    "h3": "",
+    "background": "",
+    "textColor": ""
+  },
+  "productPage": {
+    "h2": "",
+    "h3": "",
+    "background": "",
+    "textColor": "",
+    "position": ""
+  },
+  "cartPage": {
+    "h2": "",
+    "h3": "",
+    "background": "",
+    "textColor": "",
+    "position": ""
+  },
+  "requestOptions": [
+    {
+      "parameter_1": [
+        "Example campaign 1"
+      ],
+      "parameter_2": "CATEGORY",
+      "position": "product.list.before",
+      "pattern": "/category/:categoryId"
+    },
+    {
+      "parameter_1": [
+        "Example campaign 2"
+      ],
+      "parameter_2": "EMPTY_CART",
+      "position": "cart.empty.before",
+      "pattern": "/cart"
+    },
+    {
+      "parameter_1": [
+        "Example campaign 3"
+      ],
+      "parameter_2": "PRODUCT",
+      "position": "product.properties.before",
+      "pattern": "/item/:productId"
+    },
+    {
+      "parameter_1": [
+        "Example campaign 4"
+      ],
+      "parameter_2": "CMS",
+      "position": "widget",
+      "pattern": "/page/sales"
+    }
+  ]
+}
+```
 
 ## About Shopgate
 

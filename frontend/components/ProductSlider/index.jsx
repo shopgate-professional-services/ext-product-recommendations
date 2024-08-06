@@ -8,10 +8,11 @@ import withRecommendations from '../../connectors/withRecommendations';
  * @param {string} type Type.
  * @param {string} id Id.
  * @param {Object} settings widget settings.
+ * @param {Object} requestOption Options to customize request.
  * @returns {JSX}
  */
 const ProductSlider = ({
-  type, id, limit, settings,
+  type, id, limit, settings, requestOptions,
 }) => {
   const ConnectedSlider = withRecommendations(
     Slider,
@@ -20,6 +21,7 @@ const ProductSlider = ({
       id,
       limit,
       settings,
+      requestOptions,
     }
   );
 
@@ -32,6 +34,7 @@ ProductSlider.propTypes = {
   type: PropTypes.string.isRequired,
   id: PropTypes.string,
   limit: PropTypes.number,
+  requestOptions: PropTypes.shape(),
   settings: PropTypes.shape({
     h3: PropTypes.string,
     h2: PropTypes.string,
@@ -46,6 +49,7 @@ ProductSlider.propTypes = {
 
 ProductSlider.defaultProps = {
   limit: undefined,
+  requestOptions: null,
   settings: null,
   id: null,
 };

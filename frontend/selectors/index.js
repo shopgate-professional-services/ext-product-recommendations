@@ -2,10 +2,16 @@ import { createSelector } from 'reselect';
 import {
   RECOMMENDATION_TYPE_PRODUCT,
   RECOMMENDATION_TYPE_USER,
+  RECOMMENDATION_TYPE_PAGE,
 } from '../constants';
 
 const REDUX_NAMESPACE_RECOMMENDATIONS = '@shopgate-project/product-recommendations/recommendationsByType';
 
+/**
+ * Get the recommendations state.
+ * @param {Object} state .
+ * @returns {Object} The recommendations state.
+ */
 export const getRecommendationsState = state =>
   state.extensions[REDUX_NAMESPACE_RECOMMENDATIONS];
 
@@ -13,7 +19,8 @@ export const getRecommendationsStateForType = createSelector(
   getRecommendationsState,
   (state, props) => props.type,
   (state, props) => props.id,
-  (recommendations, type, id) => {
+  (state, props) => props.requestOptions,
+  (recommendations, type, id, requestOptions) => {
     const recommByType = recommendations[type];
 
     if (!recommByType) {
@@ -24,6 +31,10 @@ export const getRecommendationsStateForType = createSelector(
       return recommByType[id] || null;
     }
 
+    if (requestOptions?.pattern && type === RECOMMENDATION_TYPE_PAGE) {
+      return recommByType[requestOptions.pattern] || null;
+    }
+
     return recommByType || null;
   }
 );
@@ -31,10 +42,36 @@ export const getRecommendationsStateForType = createSelector(
 export const getRecommendationsForType = createSelector(
   getRecommendationsStateForType,
   (state, { limit }) => limit,
-  (recommendationsState, limit) =>
-    (recommendationsState && recommendationsState.products ?
-      recommendationsState.products.slice(0, limit) : null)
+  (state, { requestOptions }) => requestOptions,
+  (recommendationsState, limit, requestOptions) => {
+    if (!recommendationsState) {
+      return null;
+    }
+
+    let products = [];
+
+    const { positions, products: noPositionProducts } = recommendationsState || {};
+    const { position } = requestOptions || {};
+
+    if (positions) {
+      const { products: positionProducts = [] } = positions[position] || {};
+      products = positionProducts;
+    } else {
+      products = noPositionProducts;
+    }
+
+    if (products) {
+      return products.slice(0, limit);
+    }
+
+    return null;
+  }
 );
 
+/**
+ * Get recommendations for user.
+ * @param {Object} state .
+ * @returns {Array} List of user recommendations.
+ */
 export const getUserRecommendations = state =>
   getRecommendationsForType(state, { type: RECOMMENDATION_TYPE_USER });

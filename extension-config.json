@@ -1,5 +1,5 @@
 {
-  "version": "1.2.1",
+  "version": "1.3.0",
   "id": "@shopgate-project/product-recommendations",
   "components": [
     {
@@ -9,40 +9,44 @@
       "description": "Custom widget for recommended products on a CMS page"
     },
     {
-      "id": "recommendations",
-      "path": "frontend/pages/Recommendations/index.jsx",
-      "target": "app.routes",
-      "type": "portals"
-    },
-    {
-      "id": "PDPHeaderAfter",
+      "id": "PDPRecommendations",
       "type": "portals",
       "path": "frontend/portals/Recommendations",
-      "target": "product.header.after"
+      "target": [
+        "product.header.after",
+        "product.description.before",
+        "product.description.after",
+        "product.properties.before",
+        "product.properties.after",
+        "product.reviews.before",
+        "product.reviews.after"
+      ]
     },
     {
-      "id": "PDPDescriptionAfter",
+      "id": "CartPageRecommendations",
       "type": "portals",
       "path": "frontend/portals/Recommendations",
-      "target": "product.description.after"
+      "target": [
+        "cart.coupon-field.before",
+        "cart.coupon-field.after",
+        "cart.empty.before",
+        "cart.empty.after"
+      ]
     },
     {
-      "id": "PDPReviewAfter",
+      "id": "ProductListsRecommendations",
       "type": "portals",
       "path": "frontend/portals/Recommendations",
-      "target": "product.reviews.after"
-    },
-    {
-      "id": "CartCouponFieldBefore",
-      "type": "portals",
-      "path": "frontend/portals/Recommendations",
-      "target": "cart.coupon-field.before"
-    },
-    {
-      "id": "CartCouponFieldAfter",
-      "type": "portals",
-      "path": "frontend/portals/Recommendations",
-      "target": "cart.coupon-field.after"
+      "target": [
+        "category.list.before",
+        "category.list.after",
+        "product.list.before",
+        "product.list.after",
+        "browse.category-list.before",
+        "browse.category-list.after",
+        "no-results.content.before",
+        "no-results.content.after"
+      ]
     },
     {
       "id": "recommendationsByType",
@@ -98,6 +102,15 @@
       },
       "params": {
         "label": "Config for the cart page",
+        "type": "json"
+      }
+    },
+    "requestOptions": {
+      "type": "admin",
+      "destination": "frontend",
+      "default": [],
+      "params": {
+        "label": "Options to customize requests and positions",
         "type": "json"
       }
     }
