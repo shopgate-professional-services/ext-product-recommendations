@@ -24,6 +24,8 @@ const WithRecommendations = ({
     products={products}
     limit={limit}
     type={type}
+    id={id}
+    requestOptions={requestOptions}
     {...props}
   />);
 };

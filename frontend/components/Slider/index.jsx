@@ -17,7 +17,10 @@ const wrapper = css({
  * @param {Object} props props
  * @returns {JSX}
  */
-const Slider = ({ products, type, settings }) => {
+const Slider = ({
+  products, type, settings, id,
+  requestOptions,
+}) => {
   const { ProductSlider } = useTheme();
   const { push } = useNavigation();
 
@@ -38,7 +41,16 @@ const Slider = ({ products, type, settings }) => {
   return (
     <div className={wrapper}>
       <Header {...headerProps} />
-      <ProductSlider productIds={productIds} />
+      <ProductSlider
+        productIds={productIds}
+        scope={{
+          isRecommendation: true,
+          recommendationScope: {
+            id,
+            position: requestOptions.position,
+          },
+        }}
+      />
       {CTAText && ((
         <Button
           className={styles.button(CTABackgroundColor, CTAColor)}
@@ -52,12 +64,14 @@ const Slider = ({ products, type, settings }) => {
 };
 
 Slider.propTypes = {
+  id: PropTypes.string,
   products: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
     ]),
   })),
+  requestOptions: PropTypes.shape(),
   settings: PropTypes.shape(),
   type: PropTypes.string,
 };
