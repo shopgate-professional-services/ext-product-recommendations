@@ -13,6 +13,7 @@ const ProductRecommendations = ({
 }) => {
   const {
     limit,
+    name,
   } = settings;
   const { pathname } = useRoute();
 
@@ -23,7 +24,11 @@ const ProductRecommendations = ({
 
   // Use request options from config
   if (hasRequestOptions) {
-    const widgetOptions = requestOptions.find(option => option.position === 'widget' && option.pattern === pathname);
+    const widgetOptions = requestOptions.find(
+      option => option.position === 'widget' &&
+      option.pattern === pathname &&
+      option.widgetName === name
+    );
 
     if (widgetOptions) {
       return (
