@@ -18,7 +18,10 @@ const wrapper = css({
  * @returns {JSX}
  */
 const Slider = ({
-  products, type, settings, id,
+  products,
+  type,
+  settings,
+  id,
   requestOptions,
 }) => {
   const { ProductSlider } = useTheme();
@@ -47,7 +50,7 @@ const Slider = ({
           isRecommendation: true,
           recommendationScope: {
             id,
-            position: requestOptions.position,
+            requestOptions,
           },
         }}
       />
