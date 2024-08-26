@@ -11,7 +11,6 @@ import {
 } from '../action-creators';
 import {
   RECOMMENDATION_TYPE_USER,
-  RECOMMENDATION_TYPE_PAGE,
   RECOMMENDATIONS_PATH,
 } from '../constants';
 
@@ -31,18 +30,7 @@ export const fetchRecommendations = (type, id = null, requestOptions = null) =>
       requestOptions,
     });
 
-    if (recommendations?.positions && requestOptions?.position) {
-      const recommWithPositions = recommendations.positions[requestOptions.position];
-
-      if (!shouldFetchData(recommWithPositions)) {
-        return Promise.resolve();
-      }
-    }
-
-    if (
-      (!requestOptions?.position || type === RECOMMENDATION_TYPE_PAGE) &&
-      !shouldFetchData(recommendations)
-    ) {
+    if (recommendations && !shouldFetchData(recommendations)) {
       return Promise.resolve();
     }
 
