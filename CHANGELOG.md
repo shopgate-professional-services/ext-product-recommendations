@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## Added
 - Adjust ProductSlider scope for Recommendations needed for tracking
 
+## [1.3.1] - 2024-08-26
+## Added
+- Support for multiple recommendation widgets on "pages"
+
 ## [1.3.0] - 2024-06-27
 ## Added
 - Options to customize the `getProductRecommendations` request
