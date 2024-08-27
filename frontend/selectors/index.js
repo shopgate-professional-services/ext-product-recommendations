@@ -28,7 +28,13 @@ export const getRecommendationsStateForType = createSelector(
 
     if (id && requestOptions?.position) {
       return recommByType[id]?.positions?.[requestOptions.position];
-    } if (id && type === RECOMMENDATION_TYPE_PRODUCT) {
+    }
+
+    if (requestOptions?.position) {
+      return recommByType?.positions?.[requestOptions.position];
+    }
+
+    if (id && type === RECOMMENDATION_TYPE_PRODUCT) {
       return recommByType[id] || null;
     }
 

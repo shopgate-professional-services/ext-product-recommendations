@@ -37,6 +37,21 @@ const wrapData = (state, payload, data) => {
         },
       },
     };
+  } else if (payload?.requestOptions?.position) {
+    const { position } = payload.requestOptions;
+    const existingPositions = state[payload.type]?.positions || {};
+
+    returnData[payload.type] = {
+      ...state[payload.type],
+
+      positions: {
+        ...existingPositions,
+        [position]: {
+          ...existingPositions[position],
+          ...data,
+        },
+      },
+    };
   } else if (payload.id && payload.type === RECOMMENDATION_TYPE_PRODUCT) {
     returnData[payload.type] = {
       ...state[payload.type],
