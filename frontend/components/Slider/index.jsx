@@ -46,7 +46,7 @@ const Slider = ({
       <Header {...headerProps} />
       <ProductSlider
         productIds={productIds}
-        scope={{
+        meta={{
           isRecommendation: true,
           recommendationScope: {
             id,
