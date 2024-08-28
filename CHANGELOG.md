@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [1.4.0] - 2024-06-21
 ## Added
-- Adjust ProductSlider scope for Recommendations needed for tracking
+- Set ProductSlider.meta which is needed for tracking
 
 ## [1.3.1] - 2024-08-26
 ## Added
