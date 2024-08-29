@@ -36,7 +36,7 @@ Settings for the recommendation page
 	- `product.reviews.after`
 	- `cart.coupon-field.before`
 	- `cart.coupon-field.after`
-- `requestOptions` (optional): Options to customize the `getProductRecommendations` request and the portal positions. If this array is set, the other configs for `recommendationsPage`, `cartPage` and `productPage` will be ignored. For each option, `position`, `pattern` and `widgetName` are mandatory.<br>
+- `requestOptions` (optional): Options to customize the `getProductRecommendations` request and the portal positions. If this array is set, the other configs for `recommendationsPage`, `cartPage` and `productPage` will be ignored. For each option, `position` and `pattern` are mandatory. The `widgetName` key is required as soon as a widget is configured with the position `widget`.<br>
 Possible portal positions:
 	- `product.header.after`,
 	- `product.description.before`,
@@ -89,8 +89,7 @@ Possible portal positions:
       ],
       "parameter_2": "CATEGORY",
       "position": "product.list.before",
-      "pattern": "/category/:categoryId",
-      "widgetName": ""
+      "pattern": "/category/:categoryId"
     },
     {
       "parameter_1": [
@@ -98,8 +97,7 @@ Possible portal positions:
       ],
       "parameter_2": "EMPTY_CART",
       "position": "cart.empty.before",
-      "pattern": "/cart",
-      "widgetName": ""
+      "pattern": "/cart"
     },
     {
       "parameter_1": [
@@ -107,8 +105,7 @@ Possible portal positions:
       ],
       "parameter_2": "PRODUCT",
       "position": "product.properties.before",
-      "pattern": "/item/:productId",
-      "widgetName": ""
+      "pattern": "/item/:productId"
     },
     {
       "parameter_1": [
