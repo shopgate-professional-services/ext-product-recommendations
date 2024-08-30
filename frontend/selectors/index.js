@@ -2,7 +2,6 @@ import { createSelector } from 'reselect';
 import {
   RECOMMENDATION_TYPE_PRODUCT,
   RECOMMENDATION_TYPE_USER,
-  RECOMMENDATION_TYPE_PAGE,
 } from '../constants';
 
 const REDUX_NAMESPACE_RECOMMENDATIONS = '@shopgate-project/product-recommendations/recommendationsByType';
@@ -17,9 +16,9 @@ export const getRecommendationsState = state =>
 
 export const getRecommendationsStateForType = createSelector(
   getRecommendationsState,
-  (state, props) => props.type,
-  (state, props) => props.id,
-  (state, props) => props.requestOptions,
+  (_, props) => props.type,
+  (_, props) => props.id,
+  (_, props) => props.requestOptions,
   (recommendations, type, id, requestOptions) => {
     const recommByType = recommendations[type];
 
@@ -27,12 +26,16 @@ export const getRecommendationsStateForType = createSelector(
       return null;
     }
 
-    if (id && type === RECOMMENDATION_TYPE_PRODUCT) {
-      return recommByType[id] || null;
+    if (id && requestOptions?.position) {
+      return recommByType[id]?.positions?.[requestOptions.position];
     }
 
-    if (requestOptions?.pattern && type === RECOMMENDATION_TYPE_PAGE) {
-      return recommByType[requestOptions.pattern] || null;
+    if (requestOptions?.position) {
+      return recommByType?.positions?.[requestOptions.position];
+    }
+
+    if (id && type === RECOMMENDATION_TYPE_PRODUCT) {
+      return recommByType[id] || null;
     }
 
     return recommByType || null;
@@ -41,31 +44,10 @@ export const getRecommendationsStateForType = createSelector(
 
 export const getRecommendationsForType = createSelector(
   getRecommendationsStateForType,
-  (state, { limit }) => limit,
-  (state, { requestOptions }) => requestOptions,
-  (recommendationsState, limit, requestOptions) => {
-    if (!recommendationsState) {
-      return null;
-    }
-
-    let products = [];
-
-    const { positions, products: noPositionProducts } = recommendationsState || {};
-    const { position } = requestOptions || {};
-
-    if (positions) {
-      const { products: positionProducts = [] } = positions[position] || {};
-      products = positionProducts;
-    } else {
-      products = noPositionProducts;
-    }
-
-    if (products) {
-      return products.slice(0, limit);
-    }
-
-    return null;
-  }
+  (_, { limit }) => limit,
+  (recommendationsState, limit) =>
+    (recommendationsState && recommendationsState.products ?
+      recommendationsState.products.slice(0, limit) : null)
 );
 
 /**

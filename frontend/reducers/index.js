@@ -3,7 +3,6 @@ import {
   RECEIVE_RECOMMENDATIONS,
   REQUEST_RECOMMENDATIONS,
   RECOMMENDATION_TYPE_PRODUCT,
-  RECOMMENDATION_TYPE_PAGE,
   CLEAR_RECOMMENDATIONS,
 } from '../constants';
 
@@ -15,22 +14,20 @@ import {
  * @returns {Object}
  */
 const wrapData = (state, payload, data) => {
-  const returnData = { ...state };
+  const returnData = {
+    ...state,
+    [payload.type]: data,
+  };
 
-  if (
-    payload.type === RECOMMENDATION_TYPE_PRODUCT &&
-    payload.id &&
-    payload.requestOptions &&
-    payload.requestOptions.position
-  ) {
+  if (payload.id && payload?.requestOptions?.position) {
     const { position } = payload.requestOptions;
-    const existingProduct = state[payload.type]?.[payload.id] || {};
-    const existingPositions = existingProduct.positions || {};
+    const existingData = state[payload.type]?.[payload.id] || {};
+    const existingPositions = existingData.positions || {};
 
     returnData[payload.type] = {
       ...state[payload.type],
       [payload.id]: {
-        ...existingProduct,
+        ...existingData,
         positions: {
           ...existingPositions,
           [position]: {
@@ -40,41 +37,33 @@ const wrapData = (state, payload, data) => {
         },
       },
     };
+  } else if (payload?.requestOptions?.position) {
+    const { position } = payload.requestOptions;
+    const existingPositions = state[payload.type]?.positions || {};
 
-    return returnData;
-  }
+    returnData[payload.type] = {
+      ...state[payload.type],
 
-  if (payload.id && payload.type === RECOMMENDATION_TYPE_PRODUCT) {
+      positions: {
+        ...existingPositions,
+        [position]: {
+          ...existingPositions[position],
+          ...data,
+        },
+      },
+    };
+  } else if (payload.id && payload.type === RECOMMENDATION_TYPE_PRODUCT) {
     returnData[payload.type] = {
       ...state[payload.type],
       [payload.id]: data,
     };
-
-    return returnData;
   }
-
-  if (
-    payload.requestOptions &&
-    payload.requestOptions.pattern &&
-    payload.type === RECOMMENDATION_TYPE_PAGE
-  ) {
-    returnData[payload.type] = {
-      ...state[payload.type],
-      [payload.requestOptions.pattern]: data,
-    };
-
-    return returnData;
-  }
-
-  returnData[payload.type] = {
-    ...data,
-  };
 
   return returnData;
 };
 
 /**
- * @param {Obect} state  State
+ * @param {Object} state  State
  * @param {Object} Action Action
  * @returns {Object}
  */
