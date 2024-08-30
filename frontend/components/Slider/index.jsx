@@ -50,6 +50,7 @@ const Slider = ({
           isRecommendation: true,
           recommendationScope: {
             id,
+            type,
             requestOptions,
           },
         }}
@@ -83,6 +84,8 @@ Slider.defaultProps = {
   products: null,
   type: null,
   settings: null,
+  id: null,
+  requestOptions: null,
 };
 
 export default Slider;
