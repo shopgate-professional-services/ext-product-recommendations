@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Slider from '../Slider';
 import withRecommendations from '../../connectors/withRecommendations';
@@ -14,7 +14,7 @@ import withRecommendations from '../../connectors/withRecommendations';
 const ProductSlider = ({
   type, id, limit, settings, requestOptions,
 }) => {
-  const ConnectedSlider = withRecommendations(
+  const ConnectedSlider = useMemo(() => withRecommendations(
     Slider,
     {
       type,
@@ -23,7 +23,7 @@ const ProductSlider = ({
       settings,
       requestOptions,
     }
-  );
+  ), [id, limit, requestOptions, settings, type]);
 
   return (
     <ConnectedSlider />
