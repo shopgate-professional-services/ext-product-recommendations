@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.5.0
+## Added
+- The extension now supports fetching recommendations through an asynchronous function provided by a recommendations provider extension, as an alternative to a pipeline request.
+
+### Example
+```js
+import { appWillInit$ } from '@shopgate/engage/core/streams';
+import { configuration } from '@shopgate/engage/core/collections';
+
+export default (subscribe) => {
+  subscribe(appWillInit$, ({ getState }) => {
+    // Register an async recommendations handler that will be invoked by the @shopgate-project/product-recommendations extension
+    configuration.set('EXT_PRODUCT_RECOMMENDATIONS_HANDLER', async ({ id, type, requestOptions = {} }) => {
+      // Parse input parameters
+      // Retrieve additional data from Redux via selectors invoked with getState()
+      // await request to recommendations provider
+      return {
+        products: [], // Products in Shopgate product format
+        cacheTTL: 60 // Optional cache time in seconds
+      };
+    });
+  });
+}
+```
+
 ## [1.4.0] - 2024-06-21
 ## Added
 - Set ProductSlider.meta which is needed for tracking
