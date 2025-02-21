@@ -21,7 +21,7 @@ export default (subscribe) => {
       // Retrieve additional data from Redux via selectors invoked with getState()
       // await request to recommendations provider
       return {
-        products: [], // Products in Shopgate product format
+        products: [], // Products in `shopgate.catalog.getProducts` pipeline response format
         cacheTTL: 60 // Optional cache time in seconds
       };
     });
