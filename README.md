@@ -37,7 +37,9 @@ Settings for the recommendation page
 	- `product.reviews.after`
 	- `cart.coupon-field.before`
 	- `cart.coupon-field.after`
-- `requestOptions` (optional): Options to customize the `getProductRecommendations` request and the portal positions. If this array is set, the other configs for `recommendationsPage`, `cartPage` and `productPage` will be ignored. For each option, `position` and `pattern` are mandatory. The `widgetName` key is required as soon as a option has the value `widget` for the `position` key. Its value must match the widget setting `name`.<br>
+- `requestOptions` (optional): Options to customize the `getProductRecommendations` request and the portal positions. If this array is set, the other configs for `recommendationsPage`, `cartPage` and `productPage` will be ignored. For each option, `position` and `pattern` are mandatory. The `widgetName` key is required as soon as a option has the value `widget` for the `position` key. Its value must match the widget setting `name`.
+When multiple sliders are configured for a single page, their headers can be customized via an optional `header` property. Its value is an object with the properties `h2`, `h3`, `background` and `textColor`.
+<br>
 Possible portal positions:
 	- `product.header.after`,
 	- `product.description.before`,
@@ -106,7 +108,13 @@ Possible portal positions:
       ],
       "parameter_2": "PRODUCT",
       "position": "product.properties.before",
-      "pattern": "/item/:productId"
+      "pattern": "/item/:productId",
+      "header": {
+        "h2": "Custom header for product page slider",
+        "h3": "",
+        "background": "",
+        "textColor": ""
+      }
     },
     {
       "parameter_1": [

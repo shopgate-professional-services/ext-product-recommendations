@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## Upcoming
+### Added
+- Support for multiple slider titles on the same page via additional `header` property inside `requestOptions` entries
+
 ## [1.4.0] - 2024-06-21
 ## Added
 - Set ProductSlider.meta which is needed for tracking
