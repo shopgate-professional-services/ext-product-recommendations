@@ -19,14 +19,22 @@ const ProductRecommendations = ({
   const { pathname } = useRoute();
 
   const pageWidgetRequestOptions = useMemo(() => {
-    if (!Array.isArray(requestOptionsConfig) || requestOptionsConfig.length === 0) {
+    if (
+      (!Array.isArray(requestOptionsConfig) || requestOptionsConfig.length === 0) &&
+      !settings?.requestOptions
+    ) {
       // No request options - no config for page widgets
       return null;
     }
-
-    const requestOptions = requestOptionsConfig.find(option => option.position === 'widget' &&
+    // Check if the request options array contains a config for the current widget
+    let requestOptions = requestOptionsConfig.find(option => option.position === 'widget' &&
       option.pattern === pathname &&
       option.widgetName === name);
+
+    // Check if the widget settings contain a request options
+    if (!requestOptions && settings?.requestOptions) {
+      requestOptions = settings.requestOptions
+    }
 
     if (!requestOptions) {
       // No matching request option - no config for page widgets

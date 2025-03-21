@@ -9,13 +9,19 @@ Extension will display retrieved product pipeline data from external providers. 
   "settings": {
     "name": "example-campaign-4",
     "h3": "PRODUKTEMPFEHLUNGEN",
-    "h2": "Deine<br> personliche<br> Auswahl",
+    "h2": "Deine<br> persönliche<br> Auswahl",
     "background": "#fff",
     "textColor": "#000",
     "limit": 6,
     "CTABackgroundColor": "green",
     "CTAColor": "white",
-    "CTAText": "Zu deinen Empfehlungen"
+    "CTAText": "Zu deinen Empfehlungen",
+    "requestOptions": {
+      "parameter_1": [
+        "requestOptions property is completely optional"
+      ],
+      "parameter_2": "CATEGORY",
+    }
   }
 }
 -->
