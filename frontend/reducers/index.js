@@ -77,12 +77,20 @@ const recommendationsByType = (
         isFetching: true,
         expires: 0,
       });
-    case RECEIVE_RECOMMENDATIONS:
+    case RECEIVE_RECOMMENDATIONS: {
+      let expiryModifier = 3600;
+
+      if (typeof payload.cacheTTL !== 'undefined') {
+        expiryModifier = payload.cacheTTL;
+      }
+
       return wrapData(state, payload, {
         products: payload.products,
         isFetching: false,
-        expires: Date.now() + 3600000,
+        expires: Date.now() + (expiryModifier * 1000),
       });
+    }
+
     case ERROR_RECOMMENDATIONS:
     case CLEAR_RECOMMENDATIONS:
       return wrapData(state, payload, {

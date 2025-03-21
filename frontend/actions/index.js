@@ -3,6 +3,7 @@ import PipelineRequest from '@shopgate/pwa-core/classes/PipelineRequest';
 import { shouldFetchData } from '@shopgate/pwa-common/helpers/redux';
 import receiveProducts from '@shopgate/pwa-common-commerce/product/action-creators/receiveProducts';
 import { LoadingProvider } from '@shopgate/pwa-common/providers';
+import { configuration } from '@shopgate/engage/core';
 import { getRecommendationsStateForType } from '../selectors';
 import {
   requestRecommendations,
@@ -46,15 +47,27 @@ export const fetchRecommendations = (type, id = null, requestOptions = null) =>
       ...(requestOptions && { requestOptions }),
     };
 
-    return new PipelineRequest('shopgate.getProductRecommendations')
-      .setInput(inputParams)
-      .dispatch()
-      .then(({ products }) => {
+    // Check if an extension registered a handler function as alternative for a pipeline request
+    const handlerFn = configuration.get('EXT_PRODUCT_RECOMMENDATIONS_HANDLER');
+
+    let request;
+
+    if (handlerFn) {
+      request = handlerFn(inputParams);
+    } else {
+      request = new PipelineRequest('shopgate.getProductRecommendations')
+        .setInput(inputParams)
+        .dispatch();
+    }
+
+    return request
+      .then(({ products, cacheTTL }) => {
         dispatch(receiveRecommendations({
           id,
           type,
           products,
           requestOptions,
+          cacheTTL,
         }));
         dispatch(receiveProducts({
           products,

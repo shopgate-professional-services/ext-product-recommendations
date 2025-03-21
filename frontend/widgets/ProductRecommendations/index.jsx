@@ -35,11 +35,12 @@ const ProductRecommendations = ({
 
     return {
       ...requestOptions,
+      limit: settings?.limit,
       // Use the widget id as "position" - will be used by the reducer / selectors to distinct
       // multiple widgets at the same page.
       position: id,
     };
-  }, [id, name, pathname]);
+  }, [id, name, pathname, settings]);
 
   if (pageWidgetRequestOptions) {
     return (
