@@ -31,7 +31,10 @@ const Slider = ({
     return null;
   }
 
-  const headerProps = settings || (type === RECOMMENDATION_TYPE_CART ? cartPage : productPage);
+  const headerProps =
+    requestOptions?.header ||
+    settings ||
+    (type === RECOMMENDATION_TYPE_CART ? cartPage : productPage);
 
   const productIds = products.map(p => p.id);
 

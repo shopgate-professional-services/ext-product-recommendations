@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.5.1
+## Added
+- Support for multiple slider titles on the same page via additional `header` property inside `requestOptions` entries
+- Allowed to configure `requestOptions` inside the widget settings, so there is no need anymore to configure the same settings inside the CMS page configuration and the extension config
+
 ## 1.5.0
 ## Added
 - The extension now supports fetching recommendations through an asynchronous function provided by a recommendations provider extension, as an alternative to a pipeline request.
