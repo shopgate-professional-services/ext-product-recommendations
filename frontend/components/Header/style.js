@@ -8,7 +8,7 @@ import { css } from 'glamor';
 const wrapper = (background, color) => css({
   background,
   color,
-  padding: '12px 16px',
+  margin: '12px 16px',
   letterSpacing: '-0.01em',
 });
 

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useRoute } from '@shopgate/engage/core';
-import ProductSlider from '../../components/ProductSlider';
+import ProductList from '../../components/ProductList';
 import { RECOMMENDATION_TYPE_USER, RECOMMENDATION_TYPE_PAGE } from '../../constants';
 import { requestOptions as requestOptionsConfig } from '../../config';
 
@@ -15,6 +15,7 @@ const ProductRecommendations = ({
   const {
     limit,
     name,
+    type = 'slider',
   } = settings;
   const { pathname } = useRoute();
 
@@ -33,7 +34,7 @@ const ProductRecommendations = ({
 
     // Check if the widget settings contain a request options
     if (!requestOptions && settings?.requestOptions) {
-      requestOptions = settings.requestOptions
+      ({ requestOptions } = settings);
     }
 
     if (!requestOptions) {
@@ -52,7 +53,8 @@ const ProductRecommendations = ({
 
   if (pageWidgetRequestOptions) {
     return (
-      <ProductSlider
+      <ProductList
+        variant={type === 'list' ? 'list' : 'slider'}
         type={RECOMMENDATION_TYPE_PAGE}
         limit={limit}
         settings={settings}
@@ -64,7 +66,12 @@ const ProductRecommendations = ({
   }
 
   return (
-    <ProductSlider type={RECOMMENDATION_TYPE_USER} limit={limit} settings={settings} />
+    <ProductList
+      variant={type === 'list' ? 'list' : 'slider'}
+      type={RECOMMENDATION_TYPE_USER}
+      limit={limit}
+      settings={settings}
+    />
   );
 };
 

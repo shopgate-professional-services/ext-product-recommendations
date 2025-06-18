@@ -4,24 +4,22 @@ import { useTheme } from '@shopgate/engage/core';
 import ProductListContainer from '../ProductListContainer';
 
 /**
- * Slider component.
+ * List component.
  * @param {Object} props props
- * @returns {JSX.Element}
+ * @returns {JSX}
  */
-const Slider = ({
+const List = ({
   products,
   type,
   settings,
   id,
   requestOptions,
 }) => {
-  const { ProductSlider } = useTheme();
+  const { ProductGrid } = useTheme();
 
   if (!products || !products.length) {
     return null;
   }
-
-  const productIds = products.map(p => p.id);
 
   return (
     <ProductListContainer
@@ -29,8 +27,9 @@ const Slider = ({
       settings={settings}
       requestOptions={requestOptions}
     >
-      <ProductSlider
-        productIds={productIds}
+      <ProductGrid
+        products={products}
+        infiniteLoad={false}
         scope="productRecommendations"
         meta={{
           isRecommendation: true,
@@ -45,7 +44,7 @@ const Slider = ({
   );
 };
 
-Slider.propTypes = {
+List.propTypes = {
   id: PropTypes.string,
   products: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.oneOfType([
@@ -58,7 +57,7 @@ Slider.propTypes = {
   type: PropTypes.string,
 };
 
-Slider.defaultProps = {
+List.defaultProps = {
   products: null,
   type: null,
   settings: null,
@@ -66,4 +65,4 @@ Slider.defaultProps = {
   requestOptions: null,
 };
 
-export default Slider;
+export default List;

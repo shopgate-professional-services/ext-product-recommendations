@@ -9,6 +9,12 @@
       "description": "Custom widget for recommended products on a CMS page"
     },
     {
+      "id": "recommendations",
+      "path": "frontend/pages/Recommendations/index.jsx",
+      "target": "app.routes",
+      "type": "portals"
+    },
+    {
       "id": "PDPRecommendations",
       "type": "portals",
       "path": "frontend/portals/Recommendations",

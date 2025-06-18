@@ -4,7 +4,7 @@ import { useCurrentProduct, useRoute } from '@shopgate/engage/core';
 import { CART_PATH } from '@shopgate/engage/cart';
 import { CATEGORY_PATTERN } from '@shopgate/engage/category';
 import { SEARCH_PATTERN } from '@shopgate/engage/search';
-import ProductSlider from '../../components/ProductSlider';
+import ProductList from '../../components/ProductList';
 import {
   RECOMMENDATION_TYPE_CART,
   RECOMMENDATION_TYPE_PRODUCT,
@@ -39,14 +39,14 @@ const Recommendations = ({ name }) => {
       options?.pattern === SEARCH_PATTERN
     ) {
       return (
-        <ProductSlider type={RECOMMENDATION_TYPE_PAGE} requestOptions={options} />
+        <ProductList type={RECOMMENDATION_TYPE_PAGE} requestOptions={options} />
       );
     }
 
     // Cart page
     if (options?.pattern === CART_PATH) {
       return (
-        <ProductSlider type={RECOMMENDATION_TYPE_CART} requestOptions={options} />
+        <ProductList type={RECOMMENDATION_TYPE_CART} requestOptions={options} />
       );
     }
 
@@ -57,7 +57,7 @@ const Recommendations = ({ name }) => {
     // Product page
     if (options && productId) {
       return (
-        <ProductSlider
+        <ProductList
           type={RECOMMENDATION_TYPE_PRODUCT}
           id={productId}
           requestOptions={options}
@@ -69,7 +69,7 @@ const Recommendations = ({ name }) => {
   // Cart Portal position is different than configured.
   if (pattern === CART_PATH && name === cartPage.position) {
     return (
-      <ProductSlider type={RECOMMENDATION_TYPE_CART} />
+      <ProductList type={RECOMMENDATION_TYPE_CART} />
     );
   }
 
@@ -83,7 +83,7 @@ const Recommendations = ({ name }) => {
   }
 
   return (
-    <ProductSlider type={RECOMMENDATION_TYPE_PRODUCT} id={productId} />
+    <ProductList type={RECOMMENDATION_TYPE_PRODUCT} id={productId} />
   );
 };
 
