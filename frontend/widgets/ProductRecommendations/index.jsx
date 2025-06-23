@@ -32,7 +32,7 @@ const ProductRecommendations = ({
       option.pattern === pathname &&
       option.widgetName === name);
 
-    // Check if the widget settings contain a request options
+    // Check if the widget settings contain a request options object
     if (!requestOptions && settings?.requestOptions) {
       ({ requestOptions } = settings);
     }
@@ -60,7 +60,7 @@ const ProductRecommendations = ({
         settings={settings}
         requestOptions={pageWidgetRequestOptions}
         // Use the page-pattern as "id" - will be used the create sub-states inside the "page" state
-        id={pageWidgetRequestOptions?.pattern || id}
+        id={pageWidgetRequestOptions?.pattern || pathname || id}
       />
     );
   }
