@@ -8,6 +8,7 @@ Extension will display retrieved product pipeline data from external providers. 
   "type": "@shopgate-project/product-recommendations/ProductRecommendations",
   "settings": {
     "name": "example-campaign-4",
+    "type": "slider",
     "h3": "PRODUKTEMPFEHLUNGEN",
     "h2": "Deine<br> persönliche<br> Auswahl",
     "background": "#fff",

@@ -1,21 +1,26 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
+import List from '../List';
 import Slider from '../Slider';
 import withRecommendations from '../../connectors/withRecommendations';
 
 /**
- * General Product Slider component.
- * @param {string} type Type.
- * @param {string} id Id.
- * @param {Object} settings widget settings.
- * @param {Object} requestOption Options to customize request.
- * @returns {JSX}
+ * The ProductList component renders either a grid or a slider of products based on the variant
+ * prop.
+ * @param {Object} props The component props
+ * @param {"slider"|"list"} props.variant The variant of the product list, either 'slider' or 'list'
+ * @returns {JSX.Element}
  */
-const ProductSlider = ({
-  type, id, limit, settings, requestOptions,
+const ProductList = ({
+  variant,
+  type,
+  id,
+  limit,
+  settings,
+  requestOptions,
 }) => {
-  const ConnectedSlider = useMemo(() => withRecommendations(
-    Slider,
+  const ConnectedProductList = useMemo(() => withRecommendations(
+    variant === 'slider' ? Slider : List,
     {
       type,
       id,
@@ -23,14 +28,14 @@ const ProductSlider = ({
       settings,
       requestOptions,
     }
-  ), [id, limit, requestOptions, settings, type]);
+  ), [id, limit, requestOptions, settings, type, variant]);
 
   return (
-    <ConnectedSlider />
+    <ConnectedProductList />
   );
 };
 
-ProductSlider.propTypes = {
+ProductList.propTypes = {
   type: PropTypes.string.isRequired,
   id: PropTypes.string,
   limit: PropTypes.number,
@@ -45,13 +50,16 @@ ProductSlider.propTypes = {
     CTAColor: PropTypes.string,
     CTAText: PropTypes.string,
   }),
+  variant: PropTypes.oneOf(['slider', 'list']),
 };
 
-ProductSlider.defaultProps = {
+ProductList.defaultProps = {
+  variant: 'slider',
   limit: undefined,
   requestOptions: null,
   settings: null,
   id: null,
 };
 
-export default ProductSlider;
+export default ProductList;
+

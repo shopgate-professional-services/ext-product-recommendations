@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useRoute } from '@shopgate/engage/core';
-import ProductSlider from '../../components/ProductSlider';
+import ProductList from '../../components/ProductList';
 import { RECOMMENDATION_TYPE_USER, RECOMMENDATION_TYPE_PAGE } from '../../constants';
 import { requestOptions as requestOptionsConfig } from '../../config';
 
@@ -15,6 +15,7 @@ const ProductRecommendations = ({
   const {
     limit,
     name,
+    type = 'slider',
   } = settings;
   const { pathname } = useRoute();
 
@@ -31,9 +32,9 @@ const ProductRecommendations = ({
       option.pattern === pathname &&
       option.widgetName === name);
 
-    // Check if the widget settings contain a request options
+    // Check if the widget settings contain a request options object
     if (!requestOptions && settings?.requestOptions) {
-      requestOptions = settings.requestOptions
+      ({ requestOptions } = settings);
     }
 
     if (!requestOptions) {
@@ -52,19 +53,25 @@ const ProductRecommendations = ({
 
   if (pageWidgetRequestOptions) {
     return (
-      <ProductSlider
+      <ProductList
+        variant={type === 'list' ? 'list' : 'slider'}
         type={RECOMMENDATION_TYPE_PAGE}
         limit={limit}
         settings={settings}
         requestOptions={pageWidgetRequestOptions}
         // Use the page-pattern as "id" - will be used the create sub-states inside the "page" state
-        id={pageWidgetRequestOptions?.pattern || id}
+        id={pageWidgetRequestOptions?.pattern || pathname || id}
       />
     );
   }
 
   return (
-    <ProductSlider type={RECOMMENDATION_TYPE_USER} limit={limit} settings={settings} />
+    <ProductList
+      variant={type === 'list' ? 'list' : 'slider'}
+      type={RECOMMENDATION_TYPE_USER}
+      limit={limit}
+      settings={settings}
+    />
   );
 };
 
