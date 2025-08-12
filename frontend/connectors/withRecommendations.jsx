@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getRecommendationsForType } from '../selectors';
+import { getRecommendationsForType, getRecommendationsStateForType } from '../selectors';
 import { fetchRecommendations } from '../actions';
+import { RECOMMENDATION_TYPE_PRODUCT } from '../constants';
 
 // eslint-disable-next-line require-jsdoc
 const WithRecommendations = ({
@@ -14,11 +15,20 @@ const WithRecommendations = ({
   // eslint-disable-next-line no-shadow
   fetchRecommendations,
   requestOptions,
+  state,
   ...props
 }) => {
   useEffect(() => {
     fetchRecommendations(type, id, requestOptions);
   }, [type, id, requestOptions, fetchRecommendations]);
+
+  // This ensures that the recommendations will be fetched again is the data is expired
+  useEffect(() => {
+    if (state && !state.isFetching && state.expires === 0 && type === RECOMMENDATION_TYPE_PRODUCT) {
+      fetchRecommendations(type, id, requestOptions);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state?.isFetching, state?.expires, type]);
 
   return (<WrappedComponent
     products={products}
@@ -57,6 +67,7 @@ WithRecommendations.defaultProps = {
  */
 const mapStateToProps = (state, props) => ({
   products: getRecommendationsForType(state, props),
+  state: getRecommendationsStateForType(state, { type: props.type }),
 });
 
 /**
