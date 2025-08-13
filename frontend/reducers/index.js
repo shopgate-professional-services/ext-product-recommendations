@@ -93,9 +93,27 @@ const recommendationsByType = (
 
     case ERROR_RECOMMENDATIONS:
     case CLEAR_RECOMMENDATIONS:
+      const playloadTypeState = state[payload.type] || {};
+
+      if (payload?.type === RECOMMENDATION_TYPE_PRODUCT) {
+        // Expire all positions of all products
+        Object.keys(playloadTypeState).forEach((key) => {
+          if (playloadTypeState[key].positions) {
+            Object.keys(playloadTypeState[key].positions).forEach((positionKey) => {
+              playloadTypeState[key].positions[positionKey] = {
+                ...playloadTypeState[key].positions[positionKey],
+                isFetching: false,
+                expires: 0,
+              };
+            });
+          }
+        });
+      }
+
       return wrapData(state, payload, {
         isFetching: false,
         expires: 0,
+        ...playloadTypeState,
       });
     default:
       return state;

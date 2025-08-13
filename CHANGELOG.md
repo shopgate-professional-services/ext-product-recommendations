@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.6.0
+### Added
+- Added support for product data expiration
+
 ## 1.5.2
 ## Added
 - Added support for Recommendations widget display modes (slider (default) or product list); configure via the widget configuration’s `settings.type` property (`slider` or `list`).
