@@ -67,7 +67,7 @@ WithRecommendations.defaultProps = {
  */
 const mapStateToProps = (state, props) => ({
   products: getRecommendationsForType(state, props),
-  state: getRecommendationsStateForType(state, { type: props.type }),
+  state: getRecommendationsStateForType(state, props),
 });
 
 /**
