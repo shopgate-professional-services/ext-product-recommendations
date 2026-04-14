@@ -31,7 +31,20 @@ export const fetchRecommendations = (type, id = null, requestOptions = null) =>
       requestOptions,
     });
 
-    if (recommendations && !shouldFetchData(recommendations)) {
+    let forceFetch = false;
+
+    /**
+     * When the disableCache flag is set, we want to force a new request whenever the action is
+     * dispatched. However on PDP the action might be dispatched twice in quick succession,
+     * so we only want to force a fetch if there is no request in flight already.
+     */
+    if (requestOptions?.disableCache ?? false) {
+      if (recommendations?.isFetching === false) {
+        forceFetch = true;
+      }
+    }
+
+    if (recommendations && !shouldFetchData(recommendations) && !forceFetch) {
       return Promise.resolve();
     }
 

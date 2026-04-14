@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.6.1
+### Added
+- Added support for disabling Redux cache via the request options (add `disableCache: true` to the config)
+
 ## 1.6.0
 ### Added
 - Added support for product data expiration
