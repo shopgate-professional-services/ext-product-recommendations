@@ -44,10 +44,16 @@ export const getRecommendationsStateForType = createSelector(
 
 export const getRecommendationsForType = createSelector(
   getRecommendationsStateForType,
+  (_, { id }) => id,
   (_, { limit }) => limit,
-  (recommendationsState, limit) =>
-    (recommendationsState && recommendationsState.products ?
-      recommendationsState.products.slice(0, limit) : null)
+  (recommendationsState, productId, limit) => (
+    recommendationsState && recommendationsState.products ?
+      recommendationsState.products
+        // Remove the current visible product from the list
+        .filter(({ id, baseProductId }) => (baseProductId || id) !== productId)
+        .slice(0, limit) : null
+  )
+
 );
 
 /**

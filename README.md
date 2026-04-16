@@ -99,7 +99,8 @@ Possible portal positions:
       ],
       "parameter_2": "CATEGORY",
       "position": "product.list.before",
-      "pattern": "/category/:categoryId"
+      "pattern": "/category/:categoryId",
+      "disableCache": true
     },
     {
       "parameter_1": [

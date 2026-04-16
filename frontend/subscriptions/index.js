@@ -4,7 +4,7 @@ import { getCurrentPathname } from '@shopgate/pwa-common/selectors/router';
 import { CART_PATH } from '@shopgate/pwa-common-commerce/cart/constants';
 import { productDataExpired$ } from '@shopgate/engage/product';
 import { fetchRecommendations, fetchUserRecommendations } from '../actions';
-import { clearRecommendations, expireRecommendations } from '../action-creators';
+import { clearRecommendations } from '../action-creators';
 import { RECOMMENDATION_TYPE_CART, RECOMMENDATION_TYPE_PRODUCT } from '../constants';
 
 /**

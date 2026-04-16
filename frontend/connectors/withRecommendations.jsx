@@ -50,6 +50,10 @@ WithRecommendations.propTypes = {
     id: PropTypes.string.isRequired,
   })),
   requestOptions: PropTypes.shape(),
+  state: PropTypes.shape({
+    isFetching: PropTypes.bool,
+    expires: PropTypes.number,
+  }),
 };
 
 WithRecommendations.defaultProps = {
@@ -57,6 +61,7 @@ WithRecommendations.defaultProps = {
   products: null,
   id: null,
   requestOptions: null,
+  state: null,
 };
 
 /**
