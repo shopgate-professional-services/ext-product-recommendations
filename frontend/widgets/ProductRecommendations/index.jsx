@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useRoute } from '@shopgate/engage/core';
+import { useWidget } from '@shopgate/engage/page/hooks';
 import ProductList from '../../components/ProductList';
 import { RECOMMENDATION_TYPE_USER, RECOMMENDATION_TYPE_PAGE } from '../../constants';
 import { requestOptions as requestOptionsConfig } from '../../config';
@@ -18,6 +19,8 @@ const ProductRecommendations = ({
     type = 'slider',
   } = settings;
   const { pathname } = useRoute();
+  const { code } = useWidget();
+  const widgetId = id || code;
 
   const pageWidgetRequestOptions = useMemo(() => {
     if (
@@ -47,9 +50,9 @@ const ProductRecommendations = ({
       limit: settings?.limit,
       // Use the widget id as "position" - will be used by the reducer / selectors to distinct
       // multiple widgets at the same page.
-      position: id,
+      position: widgetId,
     };
-  }, [id, name, pathname, settings]);
+  }, [widgetId, name, pathname, settings]);
 
   if (pageWidgetRequestOptions) {
     return (
@@ -60,7 +63,7 @@ const ProductRecommendations = ({
         settings={settings}
         requestOptions={pageWidgetRequestOptions}
         // Use the page-pattern as "id" - will be used the create sub-states inside the "page" state
-        id={pageWidgetRequestOptions?.pattern || pathname || id}
+        id={pageWidgetRequestOptions?.pattern || pathname || widgetId}
       />
     );
   }
@@ -76,11 +79,12 @@ const ProductRecommendations = ({
 };
 
 ProductRecommendations.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   settings: PropTypes.shape(),
 };
 
 ProductRecommendations.defaultProps = {
+  id: null,
   settings: null,
 };
 

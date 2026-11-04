@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.7.0
+### Changed
+- Requires PWA 7.29.0 or later
+### Fixed
+- Multiple recommendation widgets on a CMS 2.0 page show their own campaigns instead of all showing the products of the first widget
+
 ## 1.6.1
 ### Added
 - Added support for disabling Redux cache via the request options (add `disableCache: true` to the config)
