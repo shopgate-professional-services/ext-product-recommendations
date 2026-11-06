@@ -28,6 +28,8 @@ Extension will display retrieved product pipeline data from external providers. 
 -->
 ```
 
+In the CMS page preview the widget shows a placeholder with its `name` instead of the products.
+
 ## Config
 
 ### recommendationsPage, cartPage and productPage config

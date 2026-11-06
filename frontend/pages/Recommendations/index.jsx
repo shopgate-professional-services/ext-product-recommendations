@@ -4,8 +4,10 @@ import { withTheme } from '@shopgate/engage/core';
 import { Route } from '@shopgate/engage/components';
 import connect from './connector';
 import { RECOMMENDATIONS_PATH } from '../../constants';
-import { recommendationsPage } from '../../config';
+import config from '../../config.json';
 import Header from '../../components/Header';
+
+const { recommendationsPage } = config;
 
 /**
  * RecommendationsPage

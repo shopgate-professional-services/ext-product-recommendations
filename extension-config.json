@@ -63,6 +63,16 @@
       "id": "Subscribers",
       "path": "frontend/subscriptions/index.js",
       "type": "subscribers"
+    },
+    {
+      "type": "translations",
+      "path": "frontend/locale/en-US.json",
+      "id": "locale/en-US"
+    },
+    {
+      "type": "translations",
+      "path": "frontend/locale/de-DE.json",
+      "id": "locale/de-DE"
     }
   ],
   "configuration": {

@@ -1,0 +1,9 @@
+{
+  "productRecommendations": {
+    "previewPlaceholder": {
+      "title": "Product Recommendations",
+      "hint": "Products are shown in the app",
+      "detail": "Widget name: {value}"
+    }
+  }
+}
