@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useRoute } from '@shopgate/engage/core';
 import { useWidget } from '@shopgate/engage/page/hooks';
 import ProductList from '../../components/ProductList';
+import PreviewPlaceholder from '../../components/PreviewPlaceholder';
 import { RECOMMENDATION_TYPE_USER, RECOMMENDATION_TYPE_PAGE } from '../../constants';
 import config from '../../config.json';
 
@@ -21,7 +22,7 @@ const ProductRecommendations = ({
     type = 'slider',
   } = settings;
   const { pathname } = useRoute();
-  const { code } = useWidget();
+  const { code, isPreview = false } = useWidget();
   const widgetId = id || code;
 
   const pageWidgetRequestOptions = useMemo(() => {
@@ -55,6 +56,10 @@ const ProductRecommendations = ({
       position: widgetId,
     };
   }, [widgetId, name, pathname, settings]);
+
+  if (isPreview) {
+    return <PreviewPlaceholder name={name} />;
+  }
 
   if (pageWidgetRequestOptions) {
     return (

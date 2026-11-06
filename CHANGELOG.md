@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 1.8.0
+### Added
+- Placeholder for recommendation widgets in the CMS page preview
 ### Changed
 - Updated the development setup (dependencies, lint and editor config) to the current PWA tooling
 
