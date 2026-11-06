@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.8.0
+### Changed
+- Updated the development setup (dependencies, lint and editor config) to the current PWA tooling
+
 ## 1.7.0
 ### Changed
 - Requires PWA 7.29.0 or later

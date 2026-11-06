@@ -4,7 +4,9 @@ import { useRoute } from '@shopgate/engage/core';
 import { useWidget } from '@shopgate/engage/page/hooks';
 import ProductList from '../../components/ProductList';
 import { RECOMMENDATION_TYPE_USER, RECOMMENDATION_TYPE_PAGE } from '../../constants';
-import { requestOptions as requestOptionsConfig } from '../../config';
+import config from '../../config.json';
+
+const { requestOptions: requestOptionsConfig } = config;
 
 /**
  * @returns {JSX}
