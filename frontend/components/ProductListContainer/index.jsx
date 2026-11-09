@@ -5,7 +5,9 @@ import { useNavigation } from '@shopgate/engage/core';
 import { css } from 'glamor';
 import Header from '../Header';
 import { RECOMMENDATIONS_PATH, RECOMMENDATION_TYPE_CART } from '../../constants';
-import { productPage, cartPage } from '../../config';
+import config from '../../config.json';
+
+const { productPage, cartPage } = config;
 
 const styles = {
   wrapper: css({

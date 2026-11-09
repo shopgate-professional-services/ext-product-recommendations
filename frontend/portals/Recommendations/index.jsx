@@ -11,7 +11,9 @@ import {
   RECOMMENDATION_TYPE_PAGE,
   BROWSE_PATH,
 } from '../../constants';
-import { productPage, cartPage, requestOptions } from '../../config';
+import config from '../../config.json';
+
+const { productPage, cartPage, requestOptions } = config;
 
 /**
  * Product slider on PDP page.

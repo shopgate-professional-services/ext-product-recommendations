@@ -1,5 +1,5 @@
 {
-  "version": "1.7.0",
+  "version": "1.8.0",
   "id": "@shopgate-project/product-recommendations",
   "components": [
     {
@@ -63,6 +63,16 @@
       "id": "Subscribers",
       "path": "frontend/subscriptions/index.js",
       "type": "subscribers"
+    },
+    {
+      "type": "translations",
+      "path": "frontend/locale/en-US.json",
+      "id": "locale/en-US"
+    },
+    {
+      "type": "translations",
+      "path": "frontend/locale/de-DE.json",
+      "id": "locale/de-DE"
     }
   ],
   "configuration": {

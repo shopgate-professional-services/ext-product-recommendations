@@ -60,7 +60,6 @@ typings/
 # IDE
 .idea
 
-package-lock.json
 coverage/
 frontend/config.json
 extension/config.json
